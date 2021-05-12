@@ -26,8 +26,8 @@ typedef struct dados_veiculos{          //Elementos que compõem o registro de d
     char data[10];
     int quantidadeLugares;
     int codLinha;
-    char *modelo;
-    char *categoria;
+    char modelo[100];                   //Coloquei essas duas como fixas pq o monitor disse q 100 tava de bom tamanho
+    char categoria[100];                //ai eh menos leak de memoria pra preocupar. soh manipular com string.h
     char removido;
     int tamanhoRegistro;                //Tamanho registro conta tudo menos o "removido" e ele msm, prefixo ->
     int tamanhoModelo;
@@ -36,8 +36,12 @@ typedef struct dados_veiculos{          //Elementos que compõem o registro de d
                         //Abaixo temos o cabeçalho das funções do "veiculos.h"
 void carrega_veiculos();
 int nomes_arqs_veiculos(FILE *arq, FILE *nv_arq, char *nm_arq, char *nm_nv_arq);
+void ler_cabecalho_veiculos_csv(Cb_vcl *cab, FILE *arq);
+void escreve_cabecalho_bin(Cb_vcl *cab, FILE *b_arq);
 
 
-
+void dados_veiculos();
+void ler_cabecalho_veiculos_bin(Cb_vcl *cabecalho, FILE *b_arq);
+void recebe_registro_csv(Dd_vcl *reg, FILE *arq);
 
 #endif /* __VEICULOS_H__ */
