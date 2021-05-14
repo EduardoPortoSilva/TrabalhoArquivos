@@ -14,7 +14,7 @@ int checa_status(FILE *arq);
 int checa_nulo(char *str);
 void preenche_string_nula(char *str, int size);
 void copiar_string(char *str1, char *str2, int size);
-
+char *trata_string(char *str, int size);
 
 void binarioNaTela(char *nomeArquivoBinario);
 void scan_quote_string(char *str);

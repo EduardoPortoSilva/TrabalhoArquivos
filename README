@@ -1,4 +1,8 @@
 Salve Salve. Repositório para o Trabalho 1 de Organização de Arquivos :)
 
-Att 13/06: Tentei fzr a função 1 funcionar, aí dei uma mudada. Não consegui muito tempo hj mas se tudo der certo eu descubro oq ta dando errado
-           Parece que estão faltando alguns bytes, vou tentar mexer mais dps.
+Att 14/05:  Tah, a "carrega_veiculos" ainda tá resultando em alguns bytes a menos doq o esperado. Ainda n sei exatamente qual o problema,
+            mas parece q ele n entra no if pra verificar se o registro eh removido ou n (lá na "manipula_campos"). A função 2 aparentemente
+            ta com algum erro no fread do cabeçalho, pelo q aparece no meu valgrind pelo menos. Na função 2 soh falta corrigir esse erro e
+            escrever a data por extenso.
+            Dividi os comandos principais em + 1 .c e .h pq tava ocupando espaço no veiculos.c e assim fica mais organizado de qq forma.
+            Mano, qq coisa, mals ai ficar fazendo essas atts sem mt desenv e tals. Eh q as vezes soh quero olhar pra um código e tentar rlxr.

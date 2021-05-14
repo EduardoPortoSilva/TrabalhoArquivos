@@ -10,39 +10,6 @@
 #include "veiculos.h"
 #include "gerais.h"
 
-void carrega_veiculos(){
-    Cb_vcl cabecalho;
-    Dd_vcl registro;
-    FILE *arq = NULL, *nv_arq = NULL;
-    long long int final;
-    char *nm_arq, *nm_nv_arq;
-    if(nomes_arqs_veiculos(arq, nv_arq, &nm_arq, &nm_nv_arq) < 0)
-        return;
-    else{
-        arq = fopen(nm_arq, "r+");
-        nv_arq = fopen(nm_nv_arq, "wb+");
-    }
-    fseek(arq, 0, SEEK_END);                                    //Essas 3 linhas são pra achar o final
-    final = ftell(arq);
-    fseek(arq, 0, SEEK_SET);
-
-    ler_cabecalho_veiculos_csv(&cabecalho, arq);
-    escreve_cabecalho_bin(&cabecalho, nv_arq);
-    while(final - 1 > ftell(arq)){
-        recebe_registro_csv(&registro, arq);
-        manipula_campos(&cabecalho, &registro);
-        preenche_dados_bin(&registro, nv_arq);
-        cabecalho.byteProxReg = ftell(nv_arq);
-    }
-
-    cabecalho.status = '1';
-    fseek(nv_arq, 0, SEEK_SET);
-    escreve_cabecalho_bin(&cabecalho, nv_arq);
-    fecha_arquivos(arq, nv_arq);                            //Fechar os arqs pra poder chamar a função do monitor
-    binarioNaTela(nm_nv_arq);
-    libera_nomes_arquivos(nm_arq, nm_nv_arq);
-}
-
 int nomes_arqs_veiculos(FILE *arq, FILE *nv_arq, char **nm_arq, char **nm_nv_arq){    //Pra receber o nome do arq original e do novo(binario)
     *nm_arq = (char *) malloc(14 * sizeof(char));
     *nm_nv_arq = (char *) malloc(14 * sizeof(char));
@@ -59,7 +26,7 @@ int nomes_arqs_veiculos(FILE *arq, FILE *nv_arq, char **nm_arq, char **nm_nv_arq
 }
 
 void ler_cabecalho_veiculos_csv(Cb_vcl *cab, FILE *arq){                    //Pra ler cabecalho do csv
-    cab->status = 0;
+    cab->status = '0';
     cab->byteProxReg = 175;
     cab->nroRegistros = 0;
     cab->nroRegRemovidos = 0;
@@ -72,20 +39,10 @@ void ler_cabecalho_veiculos_csv(Cb_vcl *cab, FILE *arq){                    //Pr
 }
 
 void escreve_cabecalho_bin(Cb_vcl *cab, FILE *b_arq){                       //Pra colocar o cabecalho no bin -> vai reescrever varias vezes
-    /*fwrite(&cab->status, 1, 1, b_arq);
+    fwrite(&cab->status, 1, 1, b_arq);
     fwrite(&cab->byteProxReg, 8, 1, b_arq);
     fwrite(&cab->nroRegistros, 4, 1, b_arq);
     fwrite(&cab->nroRegRemovidos, 4, 1, b_arq);
-    fwrite(cab->descrevePrefixo, 18, 1, b_arq);
-    fwrite(cab->descreveData, 35, 1, b_arq);
-    fwrite(cab->descreveLugares, 42, 1, b_arq);
-    fwrite(cab->descreveLinha, 26, 1, b_arq);
-    fwrite(cab->descreveModelo, 17, 1, b_arq);
-    fwrite(cab->descreveCategoria, 20, 1, b_arq);*/
-    fwrite(&cab->status, 1, 1, b_arq);
-    fwrite(&cab->byteProxReg, 1, 8, b_arq);
-    fwrite(&cab->nroRegistros, 1, 4, b_arq);
-    fwrite(&cab->nroRegRemovidos, 1, 4, b_arq);
     fwrite(cab->descrevePrefixo, 1, 18, b_arq);
     fwrite(cab->descreveData, 1, 35, b_arq);
     fwrite(cab->descreveLugares, 1, 42, b_arq);
@@ -132,67 +89,72 @@ void manipula_campos(Cb_vcl *cab, Dd_vcl *reg){                                 
 }
 
 void preenche_dados_bin(Dd_vcl *reg, FILE *b_arq){                              //Pra preencher 1 "linha" do bin
-    /*fwrite(&reg->removido, 1, 1, b_arq);
+    fwrite(&reg->removido, 1, 1, b_arq);
     fwrite(&reg->tamanhoRegistro, 4, 1, b_arq);
-    fwrite(reg->prefixo, 5, 1, b_arq);
-    fwrite(reg->data, 10, 1, b_arq);
+    fwrite(reg->prefixo, 1, 5, b_arq);
+    fwrite(reg->data, 1, 10, b_arq);
     fwrite(&reg->quantidadeLugares, 4, 1, b_arq);
     fwrite(&reg->codLinha, 4, 1, b_arq);
     fwrite(&reg->tamanhoModelo, 4, 1, b_arq);
-    if(reg->modelo[0] != '\0')      fwrite(reg->modelo, strlen(reg->modelo), 1, b_arq);
-    fwrite(&reg->tamanhoCategoria, 4, 1, b_arq);
-    if(reg->categoria[0] != '\0')   fwrite(reg->categoria, strlen(reg->categoria), 1,  b_arq);*/
-    fwrite(&reg->removido, 1, 1, b_arq);
-    fwrite(&reg->tamanhoRegistro, 1, 4, b_arq);
-    fwrite(reg->prefixo, 1, 5, b_arq);
-    fwrite(reg->data, 1, 10, b_arq);
-    fwrite(&reg->quantidadeLugares, 1, 4, b_arq);
-    fwrite(&reg->codLinha, 1, 4, b_arq);
-    fwrite(&reg->tamanhoModelo, 1, 4, b_arq);
     if(reg->modelo[0] != '\0')      fwrite(reg->modelo, 1, strlen(reg->modelo), b_arq);
-    fwrite(&reg->tamanhoCategoria, 1, 4, b_arq);
+    fwrite(&reg->tamanhoCategoria, 4, 1, b_arq);
     if(reg->categoria[0] != '\0')   fwrite(reg->categoria, 1, strlen(reg->categoria), b_arq);
 }
 
-void dados_veiculos(){
-    Cb_vcl cabecalho;
-    Dd_vcl dados;
-    char campo_nulo[] = "campo com valor nulo";                     //Pra impressao de nulos
-    char *nm_arq = (char *) malloc(11 * sizeof(char));
-    scanf("%s", nm_arq);
-
-    FILE *arq = fopen(nm_arq, "rb+");
-    if(checa_status(arq) < 0){                                      //Pra ver se o arquivo n ta inconsistente
-        free(nm_arq);
-        printf("Falha no processamento do arquivo.\n");
-        return;
-    }
-
-    ler_cabecalho_veiculos_bin(&cabecalho, arq);
-    if(cabecalho.nroRegistros <= 0){
-        printf("Registro inexistente.\n");
-        fclose(arq);
-        free(nm_arq);
-        return;
-    }
-
-    do{
-        printf("lul\n");
-    }while(1);
-
-    fclose(arq);
-    free(nm_arq);
+void ler_cabecalho_veiculos_bin(Cb_vcl *cab, FILE *b_arq){    //Ler o cabecalho direto do bin
+    fread(&cab->status, 1, 1, b_arq);
+    fread(&cab->byteProxReg, 8, 1, b_arq);
+    fread(&cab->nroRegistros, 4, 1, b_arq);
+    fread(&cab->nroRegRemovidos, 4, 1, b_arq);
+    fread(cab->descrevePrefixo, 18, 1, b_arq);
+    fread(cab->descreveData, 35, 1, b_arq);
+    fread(cab->descreveLugares, 42, 1, b_arq);
+    fread(cab->descreveLinha, 26, 1, b_arq);
+    fread(cab->descreveModelo, 17, 1, b_arq);
+    fread(cab->descreveCategoria, 20, 1, b_arq);
 }
 
-void ler_cabecalho_veiculos_bin(Cb_vcl *cabecalho, FILE *b_arq){    //Ler o cabecalho direto do bin
-    fread(&cabecalho->status, 1, 1, b_arq);
-    fread(&cabecalho->byteProxReg, 8, 1, b_arq);
-    fread(&cabecalho->nroRegistros, 4, 1, b_arq);
-    fread(&cabecalho->nroRegRemovidos, 4, 1, b_arq);
-    fread(cabecalho->descrevePrefixo, 18, 1, b_arq);
-    fread(cabecalho->descreveData, 35, 1, b_arq);
-    fread(cabecalho->descreveLugares, 42, 1, b_arq);
-    fread(cabecalho->descreveLinha, 26, 1, b_arq);
-    fread(cabecalho->descreveModelo, 17, 1, b_arq);
-    fread(cabecalho->descreveCategoria, 20, 1, b_arq);
+void recebe_registro_bin(Dd_vcl *reg, FILE *b_arq){
+    fread(&reg->removido, 1, 1, b_arq);
+    fread(&reg->tamanhoRegistro, 4, 1, b_arq);
+    fread(reg->prefixo, 5, 1, b_arq);
+    fread(reg->data, 10, 1, b_arq);
+    fread(&reg->quantidadeLugares, 4, 1, b_arq);
+    fread(&reg->codLinha, 4, 1, b_arq);
+    fread(&reg->tamanhoModelo, 4, 1, b_arq);
+    if(reg->tamanhoModelo > 0)
+        fread(reg->modelo, reg->tamanhoModelo, 1, b_arq);
+    fread(&reg->tamanhoCategoria, 4, 1, b_arq);
+    if(reg->tamanhoCategoria > 0)
+        fread(reg->categoria, reg->tamanhoCategoria, 1, b_arq);
+}
+
+void imprime_registro(Cb_vcl *cab,Dd_vcl *reg){
+    char *cab1 = trata_string(cab->descrevePrefixo, 5);
+    char *cab2 = trata_string(cab->descreveModelo, 17);
+    char *cab3 = trata_string(cab->descreveCategoria, 20);
+    char *cab4 = trata_string(cab->descreveData, 35);
+    char *cab5 = trata_string(cab->descreveLugares, 42);
+    char *reg1 = trata_string(reg->prefixo, 5);
+    char *reg2 = trata_string(reg->modelo, reg->tamanhoModelo);
+    char *reg3 = trata_string(reg->categoria, reg->tamanhoCategoria);
+    char *reg4 = trata_string(reg->data, 10);
+
+    printf("%s: %s\n", cab1, reg1);
+    printf("%s: %s\n", cab2, reg2);
+    printf("%s: %s\n", cab3, reg3);
+    printf("%s: %s\n", cab4, reg4);
+    if(reg->quantidadeLugares != -1)
+        printf("%s: %d\n\n", cab5, reg->quantidadeLugares);
+    else
+        printf("%s: campo com valor nulo\n\n", cab5);
+    free(cab1);
+    free(cab2);
+    free(cab3);
+    free(cab4);
+    free(cab5);
+    free(reg1);
+    free(reg2);
+    free(reg3);
+    free(reg4);
 }

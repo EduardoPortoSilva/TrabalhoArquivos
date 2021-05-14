@@ -44,6 +44,8 @@ void preenche_dados_bin(Dd_vcl *reg, FILE *b_arq);
 
 void dados_veiculos();
 void ler_cabecalho_veiculos_bin(Cb_vcl *cabecalho, FILE *b_arq);
+void recebe_registro_bin(Dd_vcl *reg, FILE *b_arq);
+void imprime_registro(Cb_vcl *cab,Dd_vcl *reg);
 
 
 #endif /* __VEICULOS_H__ */

@@ -25,12 +25,13 @@ int checa_status(FILE *arq){						//Função para verificar o campo "status" do 
 	char status;
 	if(arq == NULL)	return -1;
 
-	//fread(&status, 1, 1, arq);						//Depois de verificar o "status", retornaremos o cursor para o
-	//fseek(arq, 0, SEEK_SET);						//começo do arquivo. Caso não seja possível abrir o arquivo, ou caso
-	//if(status == '1')								//o "status" seja inconsistente, retornaremos -1 para representar o erro
-	//	return 0;
-	//else
-	//	return -1;
+	fread(&status, 1, 1, arq);						//Depois de verificar o "status", retornaremos o cursor para o
+	fseek(arq, 0, SEEK_SET);						//começo do arquivo. Caso não seja possível abrir o arquivo, ou caso
+	fclose(arq);
+	if(status == '1')								//o "status" seja inconsistente, retornaremos -1 para representar o erro
+		return 0;
+	else
+		return -1;
 }
 
 int checa_nulo(char *str){
@@ -58,6 +59,21 @@ void copiar_string(char *str1, char *str2, int size){
 
 	for(int i = 0; i < size; i++)
 		str2[i] = str1[i];
+}
+
+char *trata_string(char *str, int size){
+	if(size <= 0){
+		char *campo_nulo = malloc(22 * sizeof(char));
+		strcpy(campo_nulo, "campo com valor nulo");
+		return campo_nulo;
+	}
+	char *printable_str = malloc((size + 1) * sizeof(char));
+
+	for(int i = 0; i < size; i++)
+		printable_str[i] = str[i];
+	printable_str[size] = '\0';
+
+	return printable_str;
 }
 
 void binarioNaTela(char *nomeArquivoBinario) { /* Você não precisa entender o código dessa função. */

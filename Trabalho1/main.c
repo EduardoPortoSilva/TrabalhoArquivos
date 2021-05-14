@@ -6,9 +6,7 @@
 */
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-#include "veiculos.h"
-#include "linhas.h"
+#include "comandos.h"
 
 int main(int argc, char *argv[]){
     int op;                                 //Na "main", receberemos o código da operação e chamaremos
@@ -22,7 +20,7 @@ int main(int argc, char *argv[]){
             //carrega_linhas();
             break;
         case 3:
-            //dados_veiculos();
+            dados_veiculos();
             break;
         case 4:
             //dados_linhas();
