@@ -11,6 +11,11 @@
 void libera_nomes_arquivos(char *n1, char *n2);
 void fecha_arquivos(FILE *p1, FILE *p2);
 int checa_status(FILE *arq);
+int checa_nulo(char *str);
+void preenche_string_nula(char *str, int size);
+void copiar_string(char *str1, char *str2, int size);
+
+
 void binarioNaTela(char *nomeArquivoBinario);
 void scan_quote_string(char *str);
 

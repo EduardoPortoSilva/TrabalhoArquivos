@@ -35,13 +35,15 @@ typedef struct dados_veiculos{          //Elementos que compõem o registro de d
 }Dd_vcl;
                         //Abaixo temos o cabeçalho das funções do "veiculos.h"
 void carrega_veiculos();
-int nomes_arqs_veiculos(FILE *arq, FILE *nv_arq, char *nm_arq, char *nm_nv_arq);
+int nomes_arqs_veiculos(FILE *arq, FILE *nv_arq, char **nm_arq, char **nm_nv_arq);
 void ler_cabecalho_veiculos_csv(Cb_vcl *cab, FILE *arq);
 void escreve_cabecalho_bin(Cb_vcl *cab, FILE *b_arq);
-
+void recebe_registro_csv(Dd_vcl *reg, FILE *arq);
+void manipula_campos(Cb_vcl *cab, Dd_vcl *reg);
+void preenche_dados_bin(Dd_vcl *reg, FILE *b_arq);
 
 void dados_veiculos();
 void ler_cabecalho_veiculos_bin(Cb_vcl *cabecalho, FILE *b_arq);
-void recebe_registro_csv(Dd_vcl *reg, FILE *arq);
+
 
 #endif /* __VEICULOS_H__ */

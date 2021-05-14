@@ -19,25 +19,25 @@ int main(int argc, char *argv[]){
             carrega_veiculos();
             break;
         case 2:
-            carrega_linhas();
+            //carrega_linhas();
             break;
         case 3:
-            dados_veiculos();
+            //dados_veiculos();
             break;
         case 4:
-            dados_linhas();
+            //dados_linhas();
             break;
         case 5:
-            busca_veiculos();
+            //busca_veiculos();
             break;
         case 6:
-            busca_linhas();
+            //busca_linhas();
             break;
         case 7:
-            inserir_veiculos();
+            //inserir_veiculos();
             break;
         case 8:
-            inserir_linhas();
+            //inserir_linhas();
             break;
         default:
             printf("Operação inválida\n");

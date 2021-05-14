@@ -8,6 +8,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
+#include "gerais.h"
 
 void libera_nomes_arquivos(char *n1, char *n2){		//Função para liberar o nome do arquivo de entrada e o criado
 	free(n1);
@@ -23,12 +25,39 @@ int checa_status(FILE *arq){						//Função para verificar o campo "status" do 
 	char status;
 	if(arq == NULL)	return -1;
 
-	fread(status, 1, 1, arq);						//Depois de verificar o "status", retornaremos o cursor para o
-	fseek(arq, 0, SEEK_SET);						//começo do arquivo. Caso não seja possível abrir o arquivo, ou caso
-	if(status == '1')								//o "status" seja inconsistente, retornaremos -1 para representar o erro
-		return 0;
-	else
+	//fread(&status, 1, 1, arq);						//Depois de verificar o "status", retornaremos o cursor para o
+	//fseek(arq, 0, SEEK_SET);						//começo do arquivo. Caso não seja possível abrir o arquivo, ou caso
+	//if(status == '1')								//o "status" seja inconsistente, retornaremos -1 para representar o erro
+	//	return 0;
+	//else
+	//	return -1;
+}
+
+int checa_nulo(char *str){
+	int i = 0;
+	char nulo[] = "NULO";
+
+	for(i = 0; i < 4; i++){
+        if(str[i] != nulo[i])
+            break;
+    }
+    if(i == 4)
 		return -1;
+	else
+		return 0;
+}
+
+void preenche_string_nula(char *str, int size){
+	for(int i = 0; i < size; i++){
+		if(i == 0)	str[i] = '\0';
+		else	str[i] = '@';
+	}
+}
+
+void copiar_string(char *str1, char *str2, int size){
+
+	for(int i = 0; i < size; i++)
+		str2[i] = str1[i];
 }
 
 void binarioNaTela(char *nomeArquivoBinario) { /* Você não precisa entender o código dessa função. */
