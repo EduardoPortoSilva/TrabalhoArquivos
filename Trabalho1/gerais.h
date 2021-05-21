@@ -8,13 +8,15 @@
 #ifndef __GERAIS_H__
 #define __GERAIS_H__
                         //Abaixo, temos o cabeçalho das funções do "gerais.c"
-void libera_nomes_arquivos(char *n1, char *n2);
-void fecha_arquivos(FILE *p1, FILE *p2);
 int checa_status(FILE *arq);
 int checa_nulo(char *str);
 void preenche_string_nula(char *str, int size);
+void preenche_lixo(char *str, int s_atual, int s_des);
 void copiar_string(char *str1, char *str2, int size);
 char *trata_string(char *str, int size);
+char *manipula_data(char *str, char *print);
+
+
 
 void binarioNaTela(char *nomeArquivoBinario);
 void scan_quote_string(char *str);

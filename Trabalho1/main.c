@@ -26,13 +26,13 @@ int main(int argc, char *argv[]){
             //dados_linhas();
             break;
         case 5:
-            //busca_veiculos();
+            busca_veiculos();
             break;
         case 6:
             //busca_linhas();
             break;
         case 7:
-            //inserir_veiculos();
+            inserir_veiculos();
             break;
         case 8:
             //inserir_linhas();

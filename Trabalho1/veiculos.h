@@ -26,26 +26,27 @@ typedef struct dados_veiculos{          //Elementos que compõem o registro de d
     char data[10];
     int quantidadeLugares;
     int codLinha;
-    char modelo[100];                   //Coloquei essas duas como fixas pq o monitor disse q 100 tava de bom tamanho
-    char categoria[100];                //ai eh menos leak de memoria pra preocupar. soh manipular com string.h
+    char modelo[100];
+    char categoria[100];
     char removido;
-    int tamanhoRegistro;                //Tamanho registro conta tudo menos o "removido" e ele msm, prefixo ->
+    int tamanhoRegistro;
     int tamanhoModelo;
     int tamanhoCategoria;
 }Dd_vcl;
                         //Abaixo temos o cabeçalho das funções do "veiculos.h"
-void carrega_veiculos();
 int nomes_arqs_veiculos(FILE *arq, FILE *nv_arq, char **nm_arq, char **nm_nv_arq);
 void ler_cabecalho_veiculos_csv(Cb_vcl *cab, FILE *arq);
 void escreve_cabecalho_bin(Cb_vcl *cab, FILE *b_arq);
 void recebe_registro_csv(Dd_vcl *reg, FILE *arq);
 void manipula_campos(Cb_vcl *cab, Dd_vcl *reg);
 void preenche_dados_bin(Dd_vcl *reg, FILE *b_arq);
-
-void dados_veiculos();
 void ler_cabecalho_veiculos_bin(Cb_vcl *cabecalho, FILE *b_arq);
 void recebe_registro_bin(Dd_vcl *reg, FILE *b_arq);
 void imprime_registro(Cb_vcl *cab,Dd_vcl *reg);
+int checa_impressao(char *busca, char *campo, Dd_vcl *reg);
+void recebe_registro_ep(Dd_vcl *reg);
+
+
 
 
 #endif /* __VEICULOS_H__ */

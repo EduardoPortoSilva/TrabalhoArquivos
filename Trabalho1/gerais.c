@@ -11,69 +11,103 @@
 #include <ctype.h>
 #include "gerais.h"
 
-void libera_nomes_arquivos(char *n1, char *n2){		//Função para liberar o nome do arquivo de entrada e o criado
-	free(n1);
-	free(n2);
-}
-
-void fecha_arquivos(FILE *p1, FILE *p2){			//Função para fechar o arquivo recebido e o criado
-	fclose(p1);
-	fclose(p2);
-}
-
-int checa_status(FILE *arq){						//Função para verificar o campo "status" do cabeçalho dos arquivos
+int checa_status(FILE *arq){								//Função para verificar o campo "status" do cabeçalho dos arquivos
 	char status;
 	if(arq == NULL)	return -1;
 
-	fread(&status, 1, 1, arq);						//Depois de verificar o "status", retornaremos o cursor para o
-	fseek(arq, 0, SEEK_SET);						//começo do arquivo. Caso não seja possível abrir o arquivo, ou caso
-	fclose(arq);
-	if(status == '1')								//o "status" seja inconsistente, retornaremos -1 para representar o erro
+	fread(&status, 1, 1, arq);								//Depois de verificar o "status", retornaremos o cursor para o
+	fseek(arq, 0, SEEK_SET);								//começo do arquivo. Caso não seja possível abrir o arquivo, ou caso
+	if(status == '1')										//o "status" seja inconsistente, retornaremos -1 para representar o erro
 		return 0;
 	else
 		return -1;
 }
 
-int checa_nulo(char *str){
-	int i = 0;
+int checa_nulo(char *str){									//Função que irá verificar se a string passada como parâmetro faz
+	int i = 0;												//referência a um campo nulo ou não
 	char nulo[] = "NULO";
 
-	for(i = 0; i < 4; i++){
+	for(i = 0; i < 4; i++){									//Com esse simples "for" iremos comparar as posições
         if(str[i] != nulo[i])
             break;
     }
-    if(i == 4)
+    if(i == 4)												//Retornaremos -1 caso seja nulo e 0 caso contrário
 		return -1;
 	else
 		return 0;
 }
 
-void preenche_string_nula(char *str, int size){
-	for(int i = 0; i < size; i++){
-		if(i == 0)	str[i] = '\0';
+void preenche_string_nula(char *str, int size){				//Essa função será usada para preencher os campos fixos que forem nulos
+	str[0] = '\0';
+	for(int i = 1; i < size; i++)
+		str[i] = '@';
+}
+
+void preenche_lixo(char *str, int s_atual, int s_des){		//Essa função irá preencher os campos não utilizados das strings
+	for(int i = s_atual; i < s_des; i++){					//de tamanho fixo
+		if(i == s_atual)	str[i] = '\0';
 		else	str[i] = '@';
 	}
 }
 
-void copiar_string(char *str1, char *str2, int size){
+void copiar_string(char *str1, char *str2, int size){		//Essa função irá copiar a "str1" para a "str2"
 
 	for(int i = 0; i < size; i++)
 		str2[i] = str1[i];
 }
 
-char *trata_string(char *str, int size){
-	if(size <= 0){
-		char *campo_nulo = malloc(22 * sizeof(char));
-		strcpy(campo_nulo, "campo com valor nulo");
+char *trata_string(char *str, int size){					//Essa função irá manipular a string recebida para que ela possa ser 
+	char *printable_str;									//impressa
+	if(size <= 0 || str[0] == '\0'){						//Caso seja nula, receberá a string "campo_nulo"
+		char *campo_nulo = malloc(21 * sizeof(char));
+		strcpy(campo_nulo, "campo com valor nulo\0");
 		return campo_nulo;
 	}
-	char *printable_str = malloc((size + 1) * sizeof(char));
-
-	for(int i = 0; i < size; i++)
-		printable_str[i] = str[i];
-	printable_str[size] = '\0';
+	if(str[0] != '2'){										//Caso a string não seja nula e não seja uma data, usaremos "copiar_string"
+		printable_str = malloc((size + 1) * sizeof(char));
+		copiar_string(str, printable_str, size);
+		printable_str[size] = '\0';
+	}else{													//Caso seja uma data, chamaremos "manipula_data"
+		printable_str = malloc(35 * sizeof(char));
+		printable_str = manipula_data(str, printable_str);
+	}
 
 	return printable_str;
+}
+
+char *manipula_data(char *str, char *print){										//Essa função irá receber e alterar a string
+	int aux;																		//referente à data com auxílio dessas strings
+	char janeiro[] = "janeiro", fevereiro[] = "fevereiro", marco[] = "março";		//auxiliares
+	char abril[] = "abril", maio[] = "maio", junho[] = "junho", julho[] = "julho";
+	char agosto[] = "agosto", setembro[] = "setembro", outubro[] = "outubro";
+	char novembro[] = "novembro", dezembro[] = "dezembro", conector[] = " de ";
+
+	print[0] = str[8];									//Começaremos a nova string com a data e usaremos "strcat" para concatenar
+	print[1] = str[9];									//a string atual e "conector"
+	print[2] = '\0';
+	strcat(print, conector);
+	if(str[6] == '0')		strcat(print, outubro);		//Com essa sequência de ifs, verificaremos o mês e usaremos a string
+	else if(str[6] == '9')	strcat(print, setembro);	//correspondente para concatenar
+	else if(str[6] == '8')	strcat(print, agosto);
+	else if(str[6] == '7')	strcat(print, julho);
+	else if(str[6] == '6')	strcat(print, junho);
+	else if(str[6] == '5')	strcat(print, maio);
+	else if(str[6] == '4')	strcat(print, abril);
+	else if(str[6] == '3')	strcat(print, marco);
+	else if(str[6] == '2' && str[5] == '0')	strcat(print, fevereiro);
+	else if(str[6] == '1' && str[5] == '0')	strcat(print, janeiro);
+	else if(str[6] == '1' && str[5] == '1')	strcat(print, novembro);
+	else if(str[6] == '2' && str[5] == '1')	strcat(print, dezembro);
+	strcat(print, conector);							//Depois, iremos concatenar "conector" mais uma vez e inserir, por fim,
+	aux = strlen(print);								//o ano e o '\0'
+	print[aux] = str[0];
+	print[aux + 1] = str[1];
+	print[aux + 2] = str[2];
+	print[aux + 3] = str[3];
+	print[aux + 4] = '\0';
+	print = realloc(print, (aux + 5) * sizeof(char));
+
+	return print;
 }
 
 void binarioNaTela(char *nomeArquivoBinario) { /* Você não precisa entender o código dessa função. */
