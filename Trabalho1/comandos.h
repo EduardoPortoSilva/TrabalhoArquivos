@@ -16,5 +16,13 @@ void busca_veiculos();
 
 void inserir_veiculos();
 
+void carrega_linhas();
+
+void dados_linhas();
+
+void busca_linhas();
+
+void inserir_linhas();
+
 
 #endif /*__COMANDOS_H__*/

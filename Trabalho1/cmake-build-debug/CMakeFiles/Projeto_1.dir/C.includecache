@@ -6,19 +6,29 @@
 
 #IncludeRegexTransform: 
 
+/mnt/c/Workspace/Git Space/TrabalhoArquivos/Trabalho1/comandos.h
+
 /mnt/c/Workspace/Git Space/TrabalhoArquivos/Trabalho1/gerais.h
 
-/mnt/c/Workspace/Git Space/TrabalhoArquivos/Trabalho1/veiculos.c
+/mnt/c/Workspace/Git Space/TrabalhoArquivos/Trabalho1/linhas.c
 stdio.h
 -
 stdlib.h
 -
 string.h
 -
-veiculos.h
-/mnt/c/Workspace/Git Space/TrabalhoArquivos/Trabalho1/veiculos.h
+linhas.h
+/mnt/c/Workspace/Git Space/TrabalhoArquivos/Trabalho1/linhas.h
 gerais.h
 /mnt/c/Workspace/Git Space/TrabalhoArquivos/Trabalho1/gerais.h
 
-/mnt/c/Workspace/Git Space/TrabalhoArquivos/Trabalho1/veiculos.h
+/mnt/c/Workspace/Git Space/TrabalhoArquivos/Trabalho1/linhas.h
+
+/mnt/c/Workspace/Git Space/TrabalhoArquivos/Trabalho1/main.c
+stdio.h
+-
+stdlib.h
+-
+comandos.h
+/mnt/c/Workspace/Git Space/TrabalhoArquivos/Trabalho1/comandos.h
 

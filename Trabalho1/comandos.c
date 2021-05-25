@@ -28,18 +28,18 @@ void carrega_veiculos(){
     final = ftell(arq);
     fseek(arq, 0, SEEK_SET);
 
-    ler_cabecalho_veiculos_csv(&cabecalho, arq);
-    escreve_cabecalho_bin(&cabecalho, nv_arq);
+    ler_cabecalho_csv_veiculos(&cabecalho, arq);
+    escreve_cabecalho_bin_veiculos(&cabecalho, nv_arq);
     while(final - 1 > ftell(arq)){
-        recebe_registro_csv(&registro, arq);
-        manipula_campos(&cabecalho, &registro);
-        preenche_dados_bin(&registro, nv_arq);
+        recebe_registro_csv_veiculos(&registro, arq);
+        manipula_campos_veiculos(&cabecalho, &registro);
+        preenche_dados_bin_veiculos(&registro, nv_arq);
         cabecalho.byteProxReg = ftell(nv_arq);
     }
 
     cabecalho.status = '1';
     fseek(nv_arq, 0, SEEK_SET);
-    escreve_cabecalho_bin(&cabecalho, nv_arq);
+    escreve_cabecalho_bin_veiculos(&cabecalho, nv_arq);
     fclose(nv_arq);
     fclose(arq);
     binarioNaTela(nm_nv_arq);
@@ -65,7 +65,7 @@ void dados_veiculos(){                                              //Essa funç
     final  = ftell(b_arq);
     fseek(b_arq, 0, SEEK_SET);
 
-    ler_cabecalho_veiculos_bin(&cabecalho, b_arq);                  //Iremos ler o cabeçalho do arquivo com "ler_cabecalho_veiculos_bin"
+    ler_cabecalho_bin_veiculos(&cabecalho, b_arq);                  //Iremos ler o cabeçalho do arquivo com "ler_cabecalho_bin_veiculos"
     if(cabecalho.nroRegistros <= 0){                                //e verificaremos se existem registros no arquivo
         printf("Registro inexistente.\n");
         fclose(b_arq);
@@ -74,9 +74,9 @@ void dados_veiculos(){                                              //Essa funç
     }
 
     while(final != ftell(b_arq)){                                   //Usando o offset final como delimitador, iremos continuar a ler registros
-        recebe_registro_bin(&registro, b_arq);                      //com "recebe_registro_bin" e, caso não tenha sido removido, imprimiremos
-        if(registro.removido != '0')                                //suas informações com "imprime_registro"
-            imprime_registro(&cabecalho, &registro);
+        recebe_registro_bin_veiculos(&registro, b_arq);                      //com "recebe_registro_bin_veiculos" e, caso não tenha sido removido, imprimiremos
+        if(registro.removido != '0')                                //suas informações com "imprime_registro_veiculos"
+            imprime_registro_veiculos(&cabecalho, &registro);
     }
 
     fclose(b_arq);
@@ -106,7 +106,7 @@ void busca_veiculos(){                                              //Função q
     final  = ftell(b_arq);
     fseek(b_arq, 0, SEEK_SET);
 
-    ler_cabecalho_veiculos_bin(&cabecalho, b_arq);                  //Iremos ler o cabeçalho do arquivo com "ler_cabecalho_veiculos_bin"
+    ler_cabecalho_bin_veiculos(&cabecalho, b_arq);                  //Iremos ler o cabeçalho do arquivo com "ler_cabecalho_bin_veiculos"
     if(cabecalho.nroRegistros <= 0){                                //e verificaremos se existem registros no arquivo
         printf("Registro inexistente.\n");
         fclose(b_arq);
@@ -115,11 +115,11 @@ void busca_veiculos(){                                              //Função q
     }
 
     while(final != ftell(b_arq)){                                   //Usando o offset final como delimitador, iremos continuar a ler
-        recebe_registro_bin(&registro, b_arq);                      //registros com "recebe_registro_bin". Usaremos "checa_impressao"
-        if(checa_impressao(busca, campo, &registro) == 0 && registro.removido == '0')   //para verificar se o registro atual possui ou não
+        recebe_registro_bin_veiculos(&registro, b_arq);                      //registros com "recebe_registro_bin_veiculos". Usaremos "checa_impressao_veiculos"
+        if(checa_impressao_veiculos(busca, campo, &registro) == 0 && registro.removido == '0')   //para verificar se o registro atual possui ou não
             printf("Registro inexistente.\n");                                          //o valor buscado
-        else if(checa_impressao(busca, campo, &registro) == 0 && registro.removido != '0')
-            imprime_registro(&cabecalho, &registro);
+        else if(checa_impressao_veiculos(busca, campo, &registro) == 0 && registro.removido != '0')
+            imprime_registro_veiculos(&cabecalho, &registro);
     }
     fclose(b_arq);
     free(busca);
@@ -141,19 +141,90 @@ void inserir_veiculos(){                                            //Função q
         printf("Falha no processamento do arquivo.\n");
         return;
     }
-    ler_cabecalho_veiculos_bin(&cabecalho, b_arq);                  //Receberemos o cabeçalho do arquivo, pois teremos que mudá-lo no final
+    ler_cabecalho_bin_veiculos(&cabecalho, b_arq);                  //Receberemos o cabeçalho do arquivo, pois teremos que mudá-lo no final
     fseek(b_arq, 0, SEEK_END);
     cabecalho.nroRegistros += n_registers;                          //Atualizaremos o número total de registros
 
-    while(n_registers != 0){                                        //Com esse while, usaremos "recebe_registro_ep" para receber os valores dos
-        recebe_registro_ep(&registro);                              //campos do registro a partir da entrada padrão e o colocaremos no arquivo
-        preenche_dados_bin(&registro, b_arq);                       //com "preenche_dados_bin"
+    while(n_registers != 0){                                        //Com esse while, usaremos "recebe_registro_ep_veiculos" para receber os valores dos
+        recebe_registro_ep_veiculos(&registro);                              //campos do registro a partir da entrada padrão e o colocaremos no arquivo
+        preenche_dados_bin_veiculos(&registro, b_arq);                       //com "preenche_dados_bin_veiculos"
         n_registers--;
     }
     cabecalho.byteProxReg = ftell(b_arq);                           //Por fim, atualizaremos o "byteProxReg" do cabeçalho, o escreveremos mais
     fseek(b_arq, 0, SEEK_SET);                                      //uma vez no arquivo, em sua devida posição
-    escreve_cabecalho_bin(&cabecalho, b_arq);
+    escreve_cabecalho_bin_veiculos(&cabecalho, b_arq);
     fclose(b_arq);                                                  //Fecharemos o arquivo e usaremos "binarioNaTela" para obter o resultado
     binarioNaTela(nm_arq);
+    free(nm_arq);
+}
+
+void carrega_linhas(){
+    Cb_ln cabecalho;
+    Dd_ln registro;
+    FILE *arq = NULL, *nv_arq = NULL;
+    long long int final;
+    char *nm_arq, *nm_nv_arq;
+    if(nomes_arqs_linhas(&arq, nv_arq, &nm_arq, &nm_nv_arq) < 0)
+        return;
+    else{
+        nv_arq = fopen(nm_nv_arq, "wb+");
+    }
+
+    fseek(arq, 0, SEEK_END);
+    final = ftell(arq);
+    fseek(arq, 0, SEEK_SET);
+
+    ler_cabecalho_csv_linhas(&cabecalho, arq);
+    escreve_cabecalho_bin_linhas(&cabecalho, nv_arq);
+    while(final - 1 > ftell(arq)){
+        recebe_registro_csv_linhas(&registro, arq);
+        manipula_campos_linhas(&cabecalho, &registro);
+        preenche_dados_bin_linhas(&registro, nv_arq);
+        cabecalho.byteProxReg = ftell(nv_arq);
+    }
+
+    cabecalho.status = '1';
+    fseek(nv_arq, 0, SEEK_SET);
+    escreve_cabecalho_bin_linhas(&cabecalho, nv_arq);
+    fclose(nv_arq);
+    fclose(arq);
+    binarioNaTela(nm_nv_arq);
+    free(nm_arq);
+    free(nm_nv_arq);
+}
+
+void dados_linhas(){
+    Cb_ln cabecalho;                                               //de veículos
+    Dd_ln registro;
+    long long int final;
+    char *nm_arq = (char *) malloc(16 * sizeof(char));              //Primeiro, receberemos o nome do arquivo
+    scanf("%s ", nm_arq);
+
+    FILE *b_arq = fopen(nm_arq, "rb+");                             //Tentaremos abrir o arquivo e usaremos "checa_status" para
+    if(checa_status(b_arq) < 0){                                    //garantir que podemos acessá-lo sem erros
+        free(nm_arq);
+        fclose(b_arq);
+        printf("Falha no processamento do arquivo.\n");
+        return;
+    }
+    fseek(b_arq, 0, SEEK_END);                                      //Iremos usar o fseek para obtermos o offset do final do arquivo
+    final  = ftell(b_arq);
+    fseek(b_arq, 0, SEEK_SET);
+
+    ler_cabecalho_bin_linhas(&cabecalho, b_arq);                  //Iremos ler o cabeçalho do arquivo com "ler_cabecalho_bin_veiculos"
+    if(cabecalho.nroRegistros <= 0){                                //e verificaremos se existem registros no arquivo
+        printf("Registro inexistente.\n");
+        fclose(b_arq);
+        free(nm_arq);
+        return;
+    }
+
+    while(final != ftell(b_arq)){                                   //Usando o offset final como delimitador, iremos continuar a ler registros
+        recebe_registro_bin_linhas(&registro, b_arq);                      //com "recebe_registro_bin_veiculos" e, caso não tenha sido removido, imprimiremos
+        if(registro.removido != '0')                                //suas informações com "imprime_registro_veiculos"
+            imprime_registro_linhas(&cabecalho, &registro);
+    }
+
+    fclose(b_arq);
     free(nm_arq);
 }

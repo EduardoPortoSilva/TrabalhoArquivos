@@ -6,3 +6,5 @@ Att 25/05: Vo tenta mexer pra ver q q da certo. To tentando dar umas melhoradas 
 		   Na funcao nomes_arqs_veiculos (veiculos.c e veiculos.h) mudei o paremetro arq pra ter 1 fopen a menos (o parametro nv_arq não ta sendo usado, n sei se era pra ser assim mas se for pode tira ele)
 		   Na funcao escreve_cabecalho_bin (veiculos.c e veiculos.h) mudei o jeito que cria a struct para ter um fwrite só (Basicamente do jeito que eu coloquei o compilador tira todos os paddings e permite só jogar um bloco enorme de código no fwrite que ja vai tudo alinhado), isso por causa do comando que ta no nome da struct
 Caso 1 resolvido. Tava armazenando um \n no buffer de entrada de tudo, as linhas 40 e 56 do arquivo veiculos.c resolveram. Vo comita com ele resolvido e vo tenta fazer o de linhas
+Para facilitar a criação das coisas que mexem com as linhas eu renomeie todos as funçoes de veiculos para ter _veiculos no final
+Passou no caso 4, 6 e 8 mas o 3 e o 7 tao dando BO, n sei pq e ta dando uns erros meio absurdos. Amanha eu vo te o dia livre e vo tenta arruma isso enquanto vejo o mundial de valorant. Fé q da bom.

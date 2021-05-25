@@ -17,13 +17,13 @@ int main(int argc, char *argv[]){
             carrega_veiculos();
             break;
         case 2:
-            //carrega_linhas();
+            carrega_linhas();
             break;
         case 3:
             dados_veiculos();
             break;
         case 4:
-            //dados_linhas();
+            dados_linhas();
             break;
         case 5:
             busca_veiculos();
