@@ -18,12 +18,12 @@ void carrega_veiculos(){
     FILE *arq = NULL, *nv_arq = NULL;
     long long int final;
     char *nm_arq, *nm_nv_arq;
-    if(nomes_arqs_veiculos(arq, nv_arq, &nm_arq, &nm_nv_arq) < 0)
+    if(nomes_arqs_veiculos(&arq, nv_arq, &nm_arq, &nm_nv_arq) < 0)
         return;
     else{
-        arq = fopen(nm_arq, "r+");
         nv_arq = fopen(nm_nv_arq, "wb+");
     }
+
     fseek(arq, 0, SEEK_END);
     final = ftell(arq);
     fseek(arq, 0, SEEK_SET);

@@ -10,18 +10,18 @@
 #include "veiculos.h"
 #include "gerais.h"
 
-int nomes_arqs_veiculos(FILE *arq, FILE *nv_arq, char **nm_arq, char **nm_nv_arq){    //Pra receber o nome do arq original e do novo(binario)
+int nomes_arqs_veiculos(FILE **arq, FILE *nv_arq, char **nm_arq, char **nm_nv_arq){    //Pra receber o nome do arq original e do novo(binario)
     *nm_arq = (char *) malloc(14 * sizeof(char));
     *nm_nv_arq = (char *) malloc(14 * sizeof(char));
     scanf("%s %s", *nm_arq, *nm_nv_arq);
 
-    arq = fopen(*nm_arq, "r+");
-    if(arq == NULL){                                        //Checa se n tem inconsistencia
+    *arq = fopen(*nm_arq, "r+");
+    if(*arq == NULL){                                        //Checa se n tem inconsistencia
         printf("Falha no processamento do arquivo.\n");
         free(*nm_arq);
         free(*nm_nv_arq);
         return -1;
-    }fclose(arq);
+    }
 
     return 0;
 }
@@ -37,19 +37,11 @@ void ler_cabecalho_veiculos_csv(Cb_vcl *cab, FILE *arq){                    //Pr
     fscanf(arq, ",%[^,]", cab->descreveLinha);
     fscanf(arq, ",%[^,]", cab->descreveModelo);
     fscanf(arq, ",%[^\n]", cab->descreveCategoria);
+    getc(arq);
 }
 
 void escreve_cabecalho_bin(Cb_vcl *cab, FILE *b_arq){                       //Pra colocar o cabecalho no bin -> vai reescrever varias vezes
-    fwrite(&cab->status, 1, 1, b_arq);
-    fwrite(&cab->byteProxReg, 8, 1, b_arq);
-    fwrite(&cab->nroRegistros, 4, 1, b_arq);
-    fwrite(&cab->nroRegRemovidos, 4, 1, b_arq);
-    fwrite(cab->descrevePrefixo, 1, 18, b_arq);
-    fwrite(cab->descreveData, 1, 35, b_arq);
-    fwrite(cab->descreveLugares, 1, 42, b_arq);
-    fwrite(cab->descreveLinha, 1, 26, b_arq);
-    fwrite(cab->descreveModelo, 1, 17, b_arq);
-    fwrite(cab->descreveCategoria, 1, 20, b_arq);
+    fwrite(cab, sizeof(Cb_vcl), 1, b_arq);
 }
 
 void recebe_registro_csv(Dd_vcl *reg, FILE *arq){                           //Pra receber linha do csv
@@ -61,6 +53,7 @@ void recebe_registro_csv(Dd_vcl *reg, FILE *arq){                           //Pr
     fscanf(arq, ",%[^,]", codline);
     fscanf(arq, ",%[^,]", reg->modelo);
     fscanf(arq, ",%[^\n]", reg->categoria);
+    getc(arq);
 
     if(reg->prefixo[0] == '*')  reg->removido = '0';
     else    reg->removido = '1';

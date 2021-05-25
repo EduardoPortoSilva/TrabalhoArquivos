@@ -4,10 +4,11 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "/mnt/c/Workspace/CLion/Facul/Arquivos/Projeto 1/gerais.c" "/mnt/c/Workspace/CLion/Facul/Arquivos/Projeto 1/cmake-build-debug/CMakeFiles/Projeto_1.dir/gerais.c.o"
-  "/mnt/c/Workspace/CLion/Facul/Arquivos/Projeto 1/linhas.c" "/mnt/c/Workspace/CLion/Facul/Arquivos/Projeto 1/cmake-build-debug/CMakeFiles/Projeto_1.dir/linhas.c.o"
-  "/mnt/c/Workspace/CLion/Facul/Arquivos/Projeto 1/main.c" "/mnt/c/Workspace/CLion/Facul/Arquivos/Projeto 1/cmake-build-debug/CMakeFiles/Projeto_1.dir/main.c.o"
-  "/mnt/c/Workspace/CLion/Facul/Arquivos/Projeto 1/veiculos.c" "/mnt/c/Workspace/CLion/Facul/Arquivos/Projeto 1/cmake-build-debug/CMakeFiles/Projeto_1.dir/veiculos.c.o"
+  "/mnt/c/Workspace/Git Space/TrabalhoArquivos/Trabalho1/comandos.c" "/mnt/c/Workspace/Git Space/TrabalhoArquivos/Trabalho1/cmake-build-debug/CMakeFiles/Projeto_1.dir/comandos.c.o"
+  "/mnt/c/Workspace/Git Space/TrabalhoArquivos/Trabalho1/gerais.c" "/mnt/c/Workspace/Git Space/TrabalhoArquivos/Trabalho1/cmake-build-debug/CMakeFiles/Projeto_1.dir/gerais.c.o"
+  "/mnt/c/Workspace/Git Space/TrabalhoArquivos/Trabalho1/linhas.c" "/mnt/c/Workspace/Git Space/TrabalhoArquivos/Trabalho1/cmake-build-debug/CMakeFiles/Projeto_1.dir/linhas.c.o"
+  "/mnt/c/Workspace/Git Space/TrabalhoArquivos/Trabalho1/main.c" "/mnt/c/Workspace/Git Space/TrabalhoArquivos/Trabalho1/cmake-build-debug/CMakeFiles/Projeto_1.dir/main.c.o"
+  "/mnt/c/Workspace/Git Space/TrabalhoArquivos/Trabalho1/veiculos.c" "/mnt/c/Workspace/Git Space/TrabalhoArquivos/Trabalho1/cmake-build-debug/CMakeFiles/Projeto_1.dir/veiculos.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 

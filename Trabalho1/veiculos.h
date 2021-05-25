@@ -8,7 +8,7 @@
 #ifndef __VEICULOS_H__
 #define __VEICULOS_H__
 
-typedef struct cabecalho_veiculos{      //Elementos que compõem o registro de cabeçalho do arquivo de veiculos
+typedef struct __attribute__((__packed__)) cabecalho_veiculos{      //Elementos que compõem o registro de cabeçalho do arquivo de veiculos
     char status;
     long long int byteProxReg;
     int nroRegistros;
@@ -34,7 +34,7 @@ typedef struct dados_veiculos{          //Elementos que compõem o registro de d
     int tamanhoCategoria;
 }Dd_vcl;
                         //Abaixo temos o cabeçalho das funções do "veiculos.h"
-int nomes_arqs_veiculos(FILE *arq, FILE *nv_arq, char **nm_arq, char **nm_nv_arq);
+int nomes_arqs_veiculos(FILE **arq, FILE *nv_arq, char **nm_arq, char **nm_nv_arq);
 void ler_cabecalho_veiculos_csv(Cb_vcl *cab, FILE *arq);
 void escreve_cabecalho_bin(Cb_vcl *cab, FILE *b_arq);
 void recebe_registro_csv(Dd_vcl *reg, FILE *arq);

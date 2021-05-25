@@ -8,38 +8,38 @@
 		<Option virtualFolders="CMake Files\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="/mnt/c/Workspace/CLion/Facul/Arquivos/Projeto 1/cmake-build-debug"/>
+				<Option working_dir="/mnt/c/Workspace/Git Space/TrabalhoArquivos/Trabalho1/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/mnt/c/Workspace/CLion/Facul/Arquivos/Projeto\ 1/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/mnt/c/Workspace/CLion/Facul/Arquivos/Projeto\ 1/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/mnt/c/Workspace/CLion/Facul/Arquivos/Projeto\ 1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/mnt/c/Workspace/CLion/Facul/Arquivos/Projeto\ 1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/mnt/c/Workspace/Git\ Space/TrabalhoArquivos/Trabalho1/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/mnt/c/Workspace/Git\ Space/TrabalhoArquivos/Trabalho1/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/mnt/c/Workspace/Git\ Space/TrabalhoArquivos/Trabalho1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/mnt/c/Workspace/Git\ Space/TrabalhoArquivos/Trabalho1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
-				<Option working_dir="/mnt/c/Workspace/CLion/Facul/Arquivos/Projeto 1/cmake-build-debug"/>
+				<Option working_dir="/mnt/c/Workspace/Git Space/TrabalhoArquivos/Trabalho1/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/mnt/c/Workspace/CLion/Facul/Arquivos/Projeto\ 1/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/mnt/c/Workspace/CLion/Facul/Arquivos/Projeto\ 1/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/mnt/c/Workspace/CLion/Facul/Arquivos/Projeto\ 1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/mnt/c/Workspace/CLion/Facul/Arquivos/Projeto\ 1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/mnt/c/Workspace/Git\ Space/TrabalhoArquivos/Trabalho1/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/mnt/c/Workspace/Git\ Space/TrabalhoArquivos/Trabalho1/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/mnt/c/Workspace/Git\ Space/TrabalhoArquivos/Trabalho1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/mnt/c/Workspace/Git\ Space/TrabalhoArquivos/Trabalho1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="edit_cache">
-				<Option working_dir="/mnt/c/Workspace/CLion/Facul/Arquivos/Projeto 1/cmake-build-debug"/>
+				<Option working_dir="/mnt/c/Workspace/Git Space/TrabalhoArquivos/Trabalho1/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/mnt/c/Workspace/CLion/Facul/Arquivos/Projeto\ 1/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/mnt/c/Workspace/CLion/Facul/Arquivos/Projeto\ 1/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/mnt/c/Workspace/CLion/Facul/Arquivos/Projeto\ 1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/mnt/c/Workspace/CLion/Facul/Arquivos/Projeto\ 1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/mnt/c/Workspace/Git\ Space/TrabalhoArquivos/Trabalho1/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/mnt/c/Workspace/Git\ Space/TrabalhoArquivos/Trabalho1/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/mnt/c/Workspace/Git\ Space/TrabalhoArquivos/Trabalho1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/mnt/c/Workspace/Git\ Space/TrabalhoArquivos/Trabalho1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="Projeto_1">
-				<Option output="/mnt/c/Workspace/CLion/Facul/Arquivos/Projeto 1/cmake-build-debug/Projeto_1" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/mnt/c/Workspace/CLion/Facul/Arquivos/Projeto 1/cmake-build-debug"/>
+				<Option output="/mnt/c/Workspace/Git Space/TrabalhoArquivos/Trabalho1/cmake-build-debug/Projeto_1" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/mnt/c/Workspace/Git Space/TrabalhoArquivos/Trabalho1/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
@@ -50,15 +50,15 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/mnt/c/Workspace/CLion/Facul/Arquivos/Projeto\ 1/cmake-build-debug/Makefile&quot;  VERBOSE=1 Projeto_1"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/mnt/c/Workspace/CLion/Facul/Arquivos/Projeto\ 1/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/mnt/c/Workspace/CLion/Facul/Arquivos/Projeto\ 1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/mnt/c/Workspace/CLion/Facul/Arquivos/Projeto\ 1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/mnt/c/Workspace/Git\ Space/TrabalhoArquivos/Trabalho1/cmake-build-debug/Makefile&quot;  VERBOSE=1 Projeto_1"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/mnt/c/Workspace/Git\ Space/TrabalhoArquivos/Trabalho1/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/mnt/c/Workspace/Git\ Space/TrabalhoArquivos/Trabalho1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/mnt/c/Workspace/Git\ Space/TrabalhoArquivos/Trabalho1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="Projeto_1/fast">
-				<Option output="/mnt/c/Workspace/CLion/Facul/Arquivos/Projeto 1/cmake-build-debug/Projeto_1" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/mnt/c/Workspace/CLion/Facul/Arquivos/Projeto 1/cmake-build-debug"/>
+				<Option output="/mnt/c/Workspace/Git Space/TrabalhoArquivos/Trabalho1/cmake-build-debug/Projeto_1" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/mnt/c/Workspace/Git Space/TrabalhoArquivos/Trabalho1/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
@@ -69,35 +69,41 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/mnt/c/Workspace/CLion/Facul/Arquivos/Projeto\ 1/cmake-build-debug/Makefile&quot;  VERBOSE=1 Projeto_1/fast"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/mnt/c/Workspace/CLion/Facul/Arquivos/Projeto\ 1/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/mnt/c/Workspace/CLion/Facul/Arquivos/Projeto\ 1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/mnt/c/Workspace/CLion/Facul/Arquivos/Projeto\ 1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/mnt/c/Workspace/Git\ Space/TrabalhoArquivos/Trabalho1/cmake-build-debug/Makefile&quot;  VERBOSE=1 Projeto_1/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/mnt/c/Workspace/Git\ Space/TrabalhoArquivos/Trabalho1/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/mnt/c/Workspace/Git\ Space/TrabalhoArquivos/Trabalho1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/mnt/c/Workspace/Git\ Space/TrabalhoArquivos/Trabalho1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/mnt/c/Workspace/CLion/Facul/Arquivos/Projeto 1/gerais.c">
+		<Unit filename="/mnt/c/Workspace/Git Space/TrabalhoArquivos/Trabalho1/comandos.c">
 			<Option target="Projeto_1"/>
 		</Unit>
-		<Unit filename="/mnt/c/Workspace/CLion/Facul/Arquivos/Projeto 1/gerais.h">
+		<Unit filename="/mnt/c/Workspace/Git Space/TrabalhoArquivos/Trabalho1/comandos.h">
 			<Option target="Projeto_1"/>
 		</Unit>
-		<Unit filename="/mnt/c/Workspace/CLion/Facul/Arquivos/Projeto 1/linhas.c">
+		<Unit filename="/mnt/c/Workspace/Git Space/TrabalhoArquivos/Trabalho1/gerais.c">
 			<Option target="Projeto_1"/>
 		</Unit>
-		<Unit filename="/mnt/c/Workspace/CLion/Facul/Arquivos/Projeto 1/linhas.h">
+		<Unit filename="/mnt/c/Workspace/Git Space/TrabalhoArquivos/Trabalho1/gerais.h">
 			<Option target="Projeto_1"/>
 		</Unit>
-		<Unit filename="/mnt/c/Workspace/CLion/Facul/Arquivos/Projeto 1/main.c">
+		<Unit filename="/mnt/c/Workspace/Git Space/TrabalhoArquivos/Trabalho1/linhas.c">
 			<Option target="Projeto_1"/>
 		</Unit>
-		<Unit filename="/mnt/c/Workspace/CLion/Facul/Arquivos/Projeto 1/veiculos.c">
+		<Unit filename="/mnt/c/Workspace/Git Space/TrabalhoArquivos/Trabalho1/linhas.h">
 			<Option target="Projeto_1"/>
 		</Unit>
-		<Unit filename="/mnt/c/Workspace/CLion/Facul/Arquivos/Projeto 1/veiculos.h">
+		<Unit filename="/mnt/c/Workspace/Git Space/TrabalhoArquivos/Trabalho1/main.c">
 			<Option target="Projeto_1"/>
 		</Unit>
-		<Unit filename="/mnt/c/Workspace/CLion/Facul/Arquivos/Projeto 1/CMakeLists.txt">
+		<Unit filename="/mnt/c/Workspace/Git Space/TrabalhoArquivos/Trabalho1/veiculos.c">
+			<Option target="Projeto_1"/>
+		</Unit>
+		<Unit filename="/mnt/c/Workspace/Git Space/TrabalhoArquivos/Trabalho1/veiculos.h">
+			<Option target="Projeto_1"/>
+		</Unit>
+		<Unit filename="/mnt/c/Workspace/Git Space/TrabalhoArquivos/Trabalho1/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
 	</Project>

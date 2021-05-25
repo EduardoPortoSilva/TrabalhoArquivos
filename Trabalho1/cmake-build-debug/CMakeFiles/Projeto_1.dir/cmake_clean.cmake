@@ -1,4 +1,5 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/Projeto_1.dir/comandos.c.o"
   "CMakeFiles/Projeto_1.dir/gerais.c.o"
   "CMakeFiles/Projeto_1.dir/linhas.c.o"
   "CMakeFiles/Projeto_1.dir/main.c.o"

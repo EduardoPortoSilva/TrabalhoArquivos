@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/mnt/c/Workspace/Git Space/TrabalhoArquivos/Trabalho1/gerais.h
+
+/mnt/c/Workspace/Git Space/TrabalhoArquivos/Trabalho1/veiculos.c
+stdio.h
+-
+stdlib.h
+-
+string.h
+-
+veiculos.h
+/mnt/c/Workspace/Git Space/TrabalhoArquivos/Trabalho1/veiculos.h
+gerais.h
+/mnt/c/Workspace/Git Space/TrabalhoArquivos/Trabalho1/gerais.h
+
+/mnt/c/Workspace/Git Space/TrabalhoArquivos/Trabalho1/veiculos.h
+

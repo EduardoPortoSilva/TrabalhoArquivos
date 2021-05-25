@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = "/mnt/c/Workspace/CLion/Facul/Arquivos/Projeto 1"
+CMAKE_SOURCE_DIR = "/mnt/c/Workspace/Git Space/TrabalhoArquivos/Trabalho1"
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = "/mnt/c/Workspace/CLion/Facul/Arquivos/Projeto 1/cmake-build-debug"
+CMAKE_BINARY_DIR = "/mnt/c/Workspace/Git Space/TrabalhoArquivos/Trabalho1/cmake-build-debug"
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "/mnt/c/Workspace/CLion/Facul/Arquivos/Projeto 1/cmake-build-debug/CMakeFiles" "/mnt/c/Workspace/CLion/Facul/Arquivos/Projeto 1/cmake-build-debug/CMakeFiles/progress.marks"
+	$(CMAKE_COMMAND) -E cmake_progress_start "/mnt/c/Workspace/Git Space/TrabalhoArquivos/Trabalho1/cmake-build-debug/CMakeFiles" "/mnt/c/Workspace/Git Space/TrabalhoArquivos/Trabalho1/cmake-build-debug/CMakeFiles/progress.marks"
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start "/mnt/c/Workspace/CLion/Facul/Arquivos/Projeto 1/cmake-build-debug/CMakeFiles" 0
+	$(CMAKE_COMMAND) -E cmake_progress_start "/mnt/c/Workspace/Git Space/TrabalhoArquivos/Trabalho1/cmake-build-debug/CMakeFiles" 0
 .PHONY : all
 
 # The main clean target
@@ -122,6 +122,33 @@ Projeto_1: cmake_check_build_system
 Projeto_1/fast:
 	$(MAKE) -f CMakeFiles/Projeto_1.dir/build.make CMakeFiles/Projeto_1.dir/build
 .PHONY : Projeto_1/fast
+
+comandos.o: comandos.c.o
+
+.PHONY : comandos.o
+
+# target to build an object file
+comandos.c.o:
+	$(MAKE) -f CMakeFiles/Projeto_1.dir/build.make CMakeFiles/Projeto_1.dir/comandos.c.o
+.PHONY : comandos.c.o
+
+comandos.i: comandos.c.i
+
+.PHONY : comandos.i
+
+# target to preprocess a source file
+comandos.c.i:
+	$(MAKE) -f CMakeFiles/Projeto_1.dir/build.make CMakeFiles/Projeto_1.dir/comandos.c.i
+.PHONY : comandos.c.i
+
+comandos.s: comandos.c.s
+
+.PHONY : comandos.s
+
+# target to generate assembly for a file
+comandos.c.s:
+	$(MAKE) -f CMakeFiles/Projeto_1.dir/build.make CMakeFiles/Projeto_1.dir/comandos.c.s
+.PHONY : comandos.c.s
 
 gerais.o: gerais.c.o
 
@@ -240,6 +267,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... Projeto_1"
+	@echo "... comandos.o"
+	@echo "... comandos.i"
+	@echo "... comandos.s"
 	@echo "... gerais.o"
 	@echo "... gerais.i"
 	@echo "... gerais.s"
