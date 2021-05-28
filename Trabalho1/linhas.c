@@ -197,13 +197,12 @@ int checa_impressao_linhas(char *busca, char *campo, Dd_ln *reg){
 }
 
 void recebe_registro_ep_linhas(Dd_ln *reg){
+    FILE *a = stdin;
     char aux_lugares[4], aux_cod[6], cartao[4];                                        //da entrada padrão
     reg->removido = '1';                                                    //Primeiramente, sinalizaremos que o registro não é um dos removidos
     scanf("%d ",&reg->codLinha);                                      //Depois, usaremos "scan_quote_string" para receber os valores dos campos
     scan_quote_string(cartao);
-    if(checa_nulo(cartao)<0){
-
-    }
+    reg->aceitaCartao = cartao[0];
     scan_quote_string(reg->nomeLinha);
     if(strcmp(reg->nomeLinha, "NULO") + strcmp(reg->nomeLinha, "nulo") == 0){
         reg->tamanhoNome = 0;
@@ -220,5 +219,5 @@ void recebe_registro_ep_linhas(Dd_ln *reg){
         reg->tamanhoCor = strlen(reg->corLinha);
     }
     getchar();
-    reg->tamanhoRegistro = 13 + reg->tamanhoNome + reg->tamanhoRegistro;//Por fim, obteremos o tamanho total desse registro
+    reg->tamanhoRegistro = 13 + reg->tamanhoNome + reg->tamanhoCor;//Por fim, obteremos o tamanho total desse registro
 }
