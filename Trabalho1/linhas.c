@@ -41,26 +41,38 @@ void ler_cabecalho_csv_linhas(Cb_ln *cab, FILE *arq){                    //Pra l
 void escreve_cabecalho_bin_linhas(Cb_ln *cab, FILE *b_arq){
     fwrite(cab, sizeof(Cb_ln), 1, b_arq);
 }
-void recebe_registro_csv_linhas(Dd_ln *reg, FILE *arq){
+void recebe_registro_csv_linhas(Dd_ln *reg, FILE *arq) {
     char tamanhoNome[4], codline[4], tamanhoCor[4], cartao;
-    memset(reg->corLinha,'\0',8);
-    memset(reg->nomeLinha,'\0',20);
+    memset(reg->corLinha, '\0', 8);
+    memset(reg->nomeLinha, '\0', 20);
     fscanf(arq, "%[^,],", codline);
-    cartao = getc(arq);
+    reg->aceitaCartao = getc(arq);
     fscanf(arq, ",%[^,]", reg->nomeLinha);
     fscanf(arq, ",%[^\n]", reg->corLinha);
     getc(arq);
 
-    if(codline[0] == '*')  reg->removido = '0';
-    else{
+    if (codline[0] == '*') {
+        reg->removido = '0';
+        if (checa_nulo(&codline[1]) < 0) reg->codLinha = -1;
+        else reg->codLinha = atoi(&codline[1]);
+    }else {
         reg->removido = '1';
-        if(checa_nulo(codline) < 0)    reg->codLinha = -1;
-        else    reg->codLinha = atoi(codline);
+        if (checa_nulo(codline) < 0) reg->codLinha = -1;
+        else reg->codLinha = atoi(codline);
     }
-    reg->aceitaCartao = (char)(cartao == 'S');
-    reg->tamanhoCor = strlen(reg->corLinha);
-    reg->tamanhoNome = strlen(reg->nomeLinha);
-    reg->tamanhoRegistro = 18 + reg->tamanhoNome + reg->tamanhoCor; //O tamanho das strings variaveis + os fixos*/
+    if (checa_nulo(reg->nomeLinha) < 0){
+        reg->nomeLinha[0] = '\0';
+        reg->tamanhoNome = 0;
+    }else{
+        reg->tamanhoNome = strlen(reg->nomeLinha);
+    }
+    if (checa_nulo(reg->corLinha) < 0){
+        reg->corLinha[0] = '\0';
+        reg->tamanhoCor = 0;
+    }else{
+        reg->tamanhoCor = strlen(reg->corLinha);
+    }
+    reg->tamanhoRegistro = 13 + reg->tamanhoNome + reg->tamanhoCor; //O tamanho das strings variaveis + os fixos*/
 }
 void manipula_campos_linhas(Cb_ln *cab, Dd_ln *reg){
     if(reg->removido == '0'){
@@ -102,10 +114,12 @@ void ler_cabecalho_bin_linhas(Cb_ln *cabecalho, FILE *b_arq){
 void recebe_registro_bin_linhas(Dd_ln *reg, FILE *b_arq){
     fread(&reg->removido, 1, 1, b_arq);                                     //A leitura de cada item foi feita utilizando "fread" e os tamanhos,
     fread(&reg->tamanhoRegistro, 4, 1, b_arq);                              //das variáveis fixas, obtido de acordo com a descrição do trabalho
-    fread(&reg->codLinha, 1, 5, b_arq);
-    fread(&reg->aceitaCartao, 1, 10, b_arq);
+    fread(&reg->codLinha, 1, 4, b_arq);
+    fread(&reg->aceitaCartao, 1, 1, b_arq);
+    fread(&reg->tamanhoNome, 1, 4, b_arq);
     if(reg->tamanhoNome > 0)
         fread(reg->nomeLinha, 1, reg->tamanhoNome, b_arq);
+    fread(&reg->tamanhoCor, 1, 4, b_arq);
     if(reg->tamanhoCor > 0)
         fread(reg->corLinha, 1, reg->tamanhoCor, b_arq);
 }
@@ -127,14 +141,19 @@ char *itoa(int i){
 }
 
 void imprime_registro_linhas(Cb_ln *cab, Dd_ln *reg){
-    char *cab1 = trata_string(cab->descreveCodigo, 15);                    //registro analisado (reg) para imprimir corretamente as informações
-    char *cab2 = trata_string(cab->descreveNome, 13);                     //Cada string imprimível será obtida com o retorno da função "trata_string",
-    char *cab3 = trata_string(cab->descreveCor, 13);                  //declarada no arquivo "gerais.c"
-    char *cab4 = trata_string(cab->descreveCartao, 24);
-    char *reg1 = trata_string(itoa(reg->codLinha), 5);
-    char *reg2 = trata_string(reg->nomeLinha, reg->tamanhoNome);
-    char *reg3 = trata_string(reg->corLinha, reg->tamanhoCor);
-    char *reg4 = trata_string((reg->aceitaCartao == 'S')?"PAGAMENTO SOMENTE COM CARTAO SEM PRESENCA DE COBRADOR":(reg->aceitaCartao == 'N')?"PAGAMENTO EM CARTAO E DINHEIRO":"PAGAMENTO EM CARTAO SOMENTE NO FINAL DE SEMANA", (reg->aceitaCartao == 'S')? 53:(reg->aceitaCartao == 'N')?30:46);
+    char *cab1 = trata_string_linhas(cab->descreveCodigo, 15);                    //registro analisado (reg) para imprimir corretamente as informações
+    char *cab2 = trata_string_linhas(cab->descreveNome, 13);                     //Cada string imprimível será obtida com o retorno da função "trata_string_linhas",
+    char *cab3 = trata_string_linhas(cab->descreveCor, 24);                  //declarada no arquivo "gerais.c"
+    char *cab4 = trata_string_linhas(cab->descreveCartao, 13);
+    char *reg1 = trata_string_linhas(itoa(reg->codLinha), 5);
+    char *reg2 = trata_string_linhas(reg->nomeLinha, reg->tamanhoNome);
+    char *reg3 = trata_string_linhas(reg->corLinha, reg->tamanhoCor);
+    char *reg4 = trata_string_linhas(
+            (reg->aceitaCartao == 'S') ? "PAGAMENTO SOMENTE COM CARTAO SEM PRESENCA DE COBRADOR" : (reg->aceitaCartao ==
+                                                                                                    'N')
+                                                                                                   ? "PAGAMENTO EM CARTAO E DINHEIRO"
+                                                                                                   : "PAGAMENTO EM CARTAO SOMENTE NO FINAL DE SEMANA",
+            (reg->aceitaCartao == 'S') ? 53 : (reg->aceitaCartao == 'N') ? 30 : 46);
 
     printf("%s: %s\n", cab1, reg1);                                         //Uma vez obtidas, basta imprimir as strings e depois liberarmos o espaço
     printf("%s: %s\n", cab2, reg2);                                         //utilizado por cada uma
@@ -148,12 +167,58 @@ void imprime_registro_linhas(Cb_ln *cab, Dd_ln *reg){
     free(reg2);
     free(reg3);
     free(reg4);
+    printf("\n");
 }
 
 int checa_impressao_linhas(char *busca, char *campo, Dd_ln *reg){
+    int verifica = -1;
+    char *aux = NULL;
 
+    if(strcmp(campo, "codLinha") == 0){
+        aux = trata_string_linhas(itoa(reg->codLinha), 4);
+        if(strcmp(busca, aux) == 0) verifica++;
+    }else if(strcmp(campo, "aceitaCartao") == 0){
+        aux = trata_string_linhas((reg->aceitaCartao == 'S') ? "PAGAMENTO SOMENTE COM CARTAO SEM PRESENCA DE COBRADOR" : (reg->aceitaCartao == 'N')
+                                                                                                                           ? "PAGAMENTO EM CARTAO E DINHEIRO"
+                                                                                                                           : "PAGAMENTO EM CARTAO SOMENTE NO FINAL DE SEMANA",
+                                    (reg->aceitaCartao == 'S') ? 53 : (reg->aceitaCartao == 'N') ? 30 : 46);
+        if(strcmp(busca, aux) == 0) verifica++;
+    }else if(strcmp(campo, "nomeLinha") == 0){
+        if(strcmp(busca, "NULO") == 0 && reg->tamanhoNome == -1)  verifica++;
+        aux = trata_string_veiculos(reg->nomeLinha, reg->tamanhoNome);
+        if(strcmp(busca, aux) == 0) verifica++;
+    }else if(strcmp(campo, "corLinha") == 0){
+        if(strcmp(busca, "NULO") == 0 && reg->tamanhoCor == -1)  verifica++;
+        aux = trata_string_veiculos(reg->corLinha, reg->tamanhoCor);
+        if(strcmp(busca, aux) == 0) verifica++;
+    }
+    free(aux);
+    return verifica;
 }
 
 void recebe_registro_ep_linhas(Dd_ln *reg){
+    char aux_lugares[4], aux_cod[6], cartao[4];                                        //da entrada padrão
+    reg->removido = '1';                                                    //Primeiramente, sinalizaremos que o registro não é um dos removidos
+    scanf("%d ",&reg->codLinha);                                      //Depois, usaremos "scan_quote_string" para receber os valores dos campos
+    scan_quote_string(cartao);
+    if(checa_nulo(cartao)<0){
 
+    }
+    scan_quote_string(reg->nomeLinha);
+    if(strcmp(reg->nomeLinha, "NULO") + strcmp(reg->nomeLinha, "nulo") == 0){
+        reg->tamanhoNome = 0;
+        reg->nomeLinha[0] = '\0';
+    }else{
+        reg->tamanhoNome = strlen(reg->nomeLinha);
+    }
+    getchar();
+    scan_quote_string(reg->corLinha);
+    if(strcmp(reg->corLinha, "NULO") + strcmp(reg->corLinha, "nulo") == 0){
+        reg->tamanhoCor = 0;
+        reg->corLinha[0] = '\0';
+    } else {
+        reg->tamanhoCor = strlen(reg->corLinha);
+    }
+    getchar();
+    reg->tamanhoRegistro = 13 + reg->tamanhoNome + reg->tamanhoRegistro;//Por fim, obteremos o tamanho total desse registro
 }

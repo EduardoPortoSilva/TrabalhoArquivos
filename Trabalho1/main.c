@@ -29,13 +29,13 @@ int main(int argc, char *argv[]){
             busca_veiculos();
             break;
         case 6:
-            //busca_linhas();
+            busca_linhas();
             break;
         case 7:
             inserir_veiculos();
             break;
         case 8:
-            //inserir_linhas();
+            inserir_linhas();
             break;
         default:
             printf("Operação inválida\n");

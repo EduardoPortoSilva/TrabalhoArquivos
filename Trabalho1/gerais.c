@@ -56,23 +56,38 @@ void copiar_string(char *str1, char *str2, int size){		//Essa função irá copi
 		str2[i] = str1[i];
 }
 
-char *trata_string(char *str, int size){					//Essa função irá manipular a string recebida para que ela possa ser 
-	char *printable_str;									//impressa
-	if(size <= 0 || str[0] == '\0'){						//Caso seja nula, receberá a string "campo_nulo"
-		char *campo_nulo = malloc(21 * sizeof(char));
-		strcpy(campo_nulo, "campo com valor nulo\0");
-		return campo_nulo;
-	}
-	if(str[0] != '2'){										//Caso a string não seja nula e não seja uma data, usaremos "copiar_string"
-		printable_str = malloc((size + 1) * sizeof(char));
-		copiar_string(str, printable_str, size);
-		printable_str[size] = '\0';
-	}else{													//Caso seja uma data, chamaremos "manipula_data"
-		printable_str = malloc(35 * sizeof(char));
-		printable_str = manipula_data(str, printable_str);
-	}
+char *trata_string_veiculos(char *str, int size){					//Essa função irá manipular a string recebida para que ela possa ser
+    char *printable_str;									//impressa
+    if(size <= 0 || str[0] == '\0'){						//Caso seja nula, receberá a string "campo_nulo"
+        char *campo_nulo = malloc(21 * sizeof(char));
+        strcpy(campo_nulo, "campo com valor nulo\0");
+        return campo_nulo;
+    }
+    if(str[0] != '2'){										//Caso a string não seja nula e não seja uma data, usaremos "copiar_string"
+        printable_str = malloc((size + 1) * sizeof(char));
+        copiar_string(str, printable_str, size);
+        printable_str[size] = '\0';
+    }else{													//Caso seja uma data, chamaremos "manipula_data"
+        printable_str = malloc(35 * sizeof(char));
+        printable_str = manipula_data(str, printable_str);
+    }
 
-	return printable_str;
+    return printable_str;
+}
+
+char *trata_string_linhas(char *str, int size){					//Essa função irá manipular a string recebida para que ela possa ser
+    char *printable_str;									//impressa
+    if(size <= 0 || str[0] == '\0'){						//Caso seja nula, receberá a string "campo_nulo"
+        char *campo_nulo = malloc(21 * sizeof(char));
+        strcpy(campo_nulo, "campo com valor nulo\0");
+        return campo_nulo;
+    }									//Caso a string não seja nula e não seja uma data, usaremos "copiar_string"
+    printable_str = malloc((size + 1) * sizeof(char));
+    copiar_string(str, printable_str, size);
+    printable_str[size] = '\0';
+
+
+    return printable_str;
 }
 
 char *manipula_data(char *str, char *print){										//Essa função irá receber e alterar a string

@@ -126,15 +126,15 @@ void recebe_registro_bin_veiculos(Dd_vcl *reg, FILE *b_arq){                    
 }
 
 void imprime_registro_veiculos(Cb_vcl *cab, Dd_vcl *reg){                             //Essa função irá utilizar o cabeçalho do arquivo (cab) e o atual
-    char *cab1 = trata_string(cab->descrevePrefixo, 18);                    //registro analisado (reg) para imprimir corretamente as informações
-    char *cab2 = trata_string(cab->descreveModelo, 17);                     //Cada string imprimível será obtida com o retorno da função "trata_string",
-    char *cab3 = trata_string(cab->descreveCategoria, 20);                  //declarada no arquivo "gerais.c"
-    char *cab4 = trata_string(cab->descreveData, 35);
-    char *cab5 = trata_string(cab->descreveLugares, 42);
-    char *reg1 = trata_string(reg->prefixo, 5);
-    char *reg2 = trata_string(reg->modelo, reg->tamanhoModelo);
-    char *reg3 = trata_string(reg->categoria, reg->tamanhoCategoria);
-    char *reg4 = trata_string(reg->data, 10);
+    char *cab1 = trata_string_veiculos(cab->descrevePrefixo, 18);                    //registro analisado (reg) para imprimir corretamente as informações
+    char *cab2 = trata_string_veiculos(cab->descreveModelo, 17);                     //Cada string imprimível será obtida com o retorno da função "trata_string_veiculos",
+    char *cab3 = trata_string_veiculos(cab->descreveCategoria, 20);                  //declarada no arquivo "gerais.c"
+    char *cab4 = trata_string_veiculos(cab->descreveData, 35);
+    char *cab5 = trata_string_veiculos(cab->descreveLugares, 42);
+    char *reg1 = trata_string_veiculos(reg->prefixo, 5);
+    char *reg2 = trata_string_veiculos(reg->modelo, reg->tamanhoModelo);
+    char *reg3 = trata_string_veiculos(reg->categoria, reg->tamanhoCategoria);
+    char *reg4 = trata_string_veiculos(reg->data, 10);
 
     printf("%s: %s\n", cab1, reg1);                                         //Uma vez obtidas, basta imprimir as strings e depois liberarmos o espaço
     printf("%s: %s\n", cab2, reg2);                                         //utilizado por cada uma
@@ -158,21 +158,21 @@ int checa_impressao_veiculos(char *busca, char *campo, Dd_vcl *reg){            
     char *aux = NULL;                                                       //poderá ou não ser impresso
 
     if(strcmp(campo, "prefixo") == 0){                                      //Com os ifs e else-ifs externos, saberemos em qual campo do registro
-        aux = trata_string(reg->prefixo, 5);                                //devemos procurar. Depois, usaremos "trata_string" para manipular o
+        aux = trata_string_veiculos(reg->prefixo, 5);                                //devemos procurar. Depois, usaremos "trata_string_veiculos" para manipular o
         if(strcmp(busca, aux) == 0) verifica++;                             //valor do campo e compará-lo com "busca"
     }else if(strcmp(campo, "data") == 0){
-        aux = trata_string(reg->data, 10);
+        aux = trata_string_veiculos(reg->data, 10);
         if(strcmp(busca, aux) == 0) verifica++;
     }else if(strcmp(campo, "quantidadeLugares") == 0){                      //Usaremos "atoi" para comparar o valor de "quantidadeLugares"
         if(strcmp(busca, "NULO") == 0 && reg->quantidadeLugares == -1)  verifica++;
         else if(atoi(busca) == reg->quantidadeLugares)  verifica++;
     }else if(strcmp(campo, "modelo") == 0){                                 //Para campos de tamanhos variáveis, verificaremos seus tamanhos e as
         if(strcmp(busca, "NULO") == 0 && reg->tamanhoModelo == -1)  verifica++; //strings, caso não sejam nulas
-        aux = trata_string(reg->modelo, reg->tamanhoModelo);
+        aux = trata_string_veiculos(reg->modelo, reg->tamanhoModelo);
         if(strcmp(busca, aux) == 0) verifica++;
     }else if(strcmp(campo, "categoria") == 0){
         if(strcmp(busca, "NULO") == 0 && reg->tamanhoCategoria == -1)   verifica++;
-        aux = trata_string(reg->categoria, reg->tamanhoCategoria);
+        aux = trata_string_veiculos(reg->categoria, reg->tamanhoCategoria);
         if(strcmp(busca, aux) == 0) verifica++;
     }
     free(aux);

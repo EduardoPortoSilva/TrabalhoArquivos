@@ -13,7 +13,8 @@ int checa_nulo(char *str);
 void preenche_string_nula(char *str, int size);
 void preenche_lixo(char *str, int s_atual, int s_des);
 void copiar_string(char *str1, char *str2, int size);
-char *trata_string(char *str, int size);
+char *trata_string_veiculos(char *str, int size);
+char *trata_string_linhas(char *str, int size);
 char *manipula_data(char *str, char *print);
 
 

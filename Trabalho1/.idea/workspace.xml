@@ -25,11 +25,13 @@
       <change beforePath="$PROJECT_DIR$/Trabalho1.zip" beforeDir="false" afterPath="$PROJECT_DIR$/Trabalho1.zip" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Projeto_1.dir/C.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Projeto_1.dir/C.includecache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Projeto_1.dir/comandos.c.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Projeto_1.dir/comandos.c.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Projeto_1.dir/gerais.c.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Projeto_1.dir/gerais.c.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Projeto_1.dir/linhas.c.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Projeto_1.dir/linhas.c.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Projeto_1.dir/main.c.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Projeto_1.dir/main.c.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Projeto_1.dir/veiculos.c.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Projeto_1.dir/veiculos.c.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/Projeto_1" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Projeto_1" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/linha3.bin" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/linha3.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/comandos.c" beforeDir="false" afterPath="$PROJECT_DIR$/comandos.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/comandos.h" beforeDir="false" afterPath="$PROJECT_DIR$/comandos.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gerais.c" beforeDir="false" afterPath="$PROJECT_DIR$/gerais.c" afterDir="false" />
@@ -71,6 +73,7 @@
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="settings.editor.selected.configurable" value="dynamic.analysis.tools.valgrind" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -79,11 +82,6 @@
   </component>
   <component name="RunManager">
     <configuration name="Projeto_1" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Projeto_1" TARGET_NAME="Projeto_1" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Projeto_1" RUN_TARGET_NAME="Projeto_1">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -104,6 +102,10 @@
       <updated>1621947617177</updated>
       <workItem from="1621947618481" duration="19832000" />
       <workItem from="1621976566073" duration="644000" />
+      <workItem from="1622054426319" duration="603000" />
+      <workItem from="1622140402046" duration="592000" />
+      <workItem from="1622148248962" duration="1514000" />
+      <workItem from="1622206728895" duration="11242000" />
     </task>
     <servers />
   </component>
@@ -150,24 +152,45 @@
           <option name="timeStamp" value="7" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/linhas.c</url>
-          <line>71</line>
-          <option name="timeStamp" value="11" />
+          <url>file://$PROJECT_DIR$/comandos.c</url>
+          <line>197</line>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/gerais.c</url>
+          <line>93</line>
+          <option name="timeStamp" value="21" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/linhas.c</url>
-          <line>87</line>
-          <option name="timeStamp" value="12" />
+          <line>143</line>
+          <option name="timeStamp" value="22" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/main.c</url>
-          <line>11</line>
-          <option name="timeStamp" value="13" />
+          <url>file://$PROJECT_DIR$/linhas.c</url>
+          <line>103</line>
+          <option name="timeStamp" value="24" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/comandos.c</url>
-          <line>196</line>
-          <option name="timeStamp" value="14" />
+          <line>255</line>
+          <option name="timeStamp" value="25" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <condition expression="i == 91" language="ObjectiveC" />
+          <url>file://$PROJECT_DIR$/comandos.c</url>
+          <line>180</line>
+          <option name="timeStamp" value="34" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/linhas.c</url>
+          <line>83</line>
+          <option name="timeStamp" value="36" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/comandos.c</url>
+          <line>274</line>
+          <option name="timeStamp" value="37" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -6,8 +6,6 @@
 
 #IncludeRegexTransform: 
 
-/mnt/c/Workspace/Git Space/TrabalhoArquivos/Trabalho1/comandos.h
-
 /mnt/c/Workspace/Git Space/TrabalhoArquivos/Trabalho1/gerais.h
 
 /mnt/c/Workspace/Git Space/TrabalhoArquivos/Trabalho1/linhas.c
@@ -23,12 +21,4 @@ gerais.h
 /mnt/c/Workspace/Git Space/TrabalhoArquivos/Trabalho1/gerais.h
 
 /mnt/c/Workspace/Git Space/TrabalhoArquivos/Trabalho1/linhas.h
-
-/mnt/c/Workspace/Git Space/TrabalhoArquivos/Trabalho1/main.c
-stdio.h
--
-stdlib.h
--
-comandos.h
-/mnt/c/Workspace/Git Space/TrabalhoArquivos/Trabalho1/comandos.h
 
