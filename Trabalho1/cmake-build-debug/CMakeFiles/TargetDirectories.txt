@@ -1,3 +1,0 @@
-/mnt/c/Workspace/Git Space/TrabalhoArquivos/Trabalho1/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/mnt/c/Workspace/Git Space/TrabalhoArquivos/Trabalho1/cmake-build-debug/CMakeFiles/edit_cache.dir
-/mnt/c/Workspace/Git Space/TrabalhoArquivos/Trabalho1/cmake-build-debug/CMakeFiles/Projeto_1.dir
