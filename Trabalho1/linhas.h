@@ -30,10 +30,8 @@ typedef struct dados_linhas{            //Elementos que compõem o registro de d
     int tamanhoCor;
 }Dd_ln;
                         //Abaixo, temos o cabeçalho das funções do "linhas.c"
-
 int nomes_arqs_linhas(FILE **arq, FILE *nv_arq, char **nm_arq, char **nm_nv_arq);
 void ler_cabecalho_csv_linhas(Cb_ln *cab, FILE *arq);
-void escreve_cabecalho_bin_linhas(Cb_ln *cab, FILE *b_arq);
 void recebe_registro_csv_linhas(Dd_ln *reg, FILE *arq);
 void manipula_campos_linhas(Cb_ln *cab, Dd_ln *reg);
 void preenche_dados_bin_linhas(Dd_ln *reg, FILE *b_arq);
@@ -42,8 +40,5 @@ void recebe_registro_bin_linhas(Dd_ln *reg, FILE *b_arq);
 void imprime_registro_linhas(Cb_ln *cab, Dd_ln *reg);
 int checa_impressao_linhas(char *busca, char *campo, Dd_ln *reg);
 void recebe_registro_ep_linhas(Dd_ln *reg);
-
-
-
 
 #endif /* __LINHAS_H__ */

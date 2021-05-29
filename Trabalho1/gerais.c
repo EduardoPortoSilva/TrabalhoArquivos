@@ -3,7 +3,8 @@
     Tulio Santana Ramos             NUSP 11795526
 
     Esse arquivo .c contém funções disponibilizadas no run.codes
-    e outras funções utilizadas em ambos os arquivos
+    e outras funções utilizadas em ambos os arquivos.
+	Principalmente no tratamento de strings e checagem de acesso aos arquivos
 */
 #include <stdio.h>
 #include <stdlib.h>
@@ -51,13 +52,12 @@ void preenche_lixo(char *str, int s_atual, int s_des){		//Essa função irá pre
 }
 
 void copiar_string(char *str1, char *str2, int size){		//Essa função irá copiar a "str1" para a "str2"
-
 	for(int i = 0; i < size; i++)
 		str2[i] = str1[i];
 }
 
-char *trata_string_veiculos(char *str, int size){					//Essa função irá manipular a string recebida para que ela possa ser
-    char *printable_str;									//impressa
+char *trata_string_veiculos(char *str, int size){			//Essa função irá manipular a string recebida para
+    char *printable_str;									//que ela possa ser impressa
     if(size <= 0 || str[0] == '\0'){						//Caso seja nula, receberá a string "campo_nulo"
         char *campo_nulo = malloc(21 * sizeof(char));
         strcpy(campo_nulo, "campo com valor nulo\0");
@@ -75,17 +75,16 @@ char *trata_string_veiculos(char *str, int size){					//Essa função irá manip
     return printable_str;
 }
 
-char *trata_string_linhas(char *str, int size){					//Essa função irá manipular a string recebida para que ela possa ser
-    char *printable_str;									//impressa
+char *trata_string_linhas(char *str, int size){				//Essa função irá manipular a string recebida para
+    char *printable_str;									//que ela possa ser impressa
     if(size <= 0 || str[0] == '\0'){						//Caso seja nula, receberá a string "campo_nulo"
         char *campo_nulo = malloc(21 * sizeof(char));
         strcpy(campo_nulo, "campo com valor nulo\0");
         return campo_nulo;
-    }									//Caso a string não seja nula e não seja uma data, usaremos "copiar_string"
+    }														//Quando necessário, também usaremos "copiar_string"
     printable_str = malloc((size + 1) * sizeof(char));
     copiar_string(str, printable_str, size);
     printable_str[size] = '\0';
-
 
     return printable_str;
 }

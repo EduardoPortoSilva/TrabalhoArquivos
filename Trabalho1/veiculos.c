@@ -10,13 +10,13 @@
 #include "veiculos.h"
 #include "gerais.h"
 
-int nomes_arqs_veiculos(FILE **arq, FILE *nv_arq, char **nm_arq, char **nm_nv_arq){    //Pra receber o nome do arq original e do novo(binario)
-    *nm_arq = (char *) malloc(14 * sizeof(char));
+int nomes_arqs_veiculos(FILE **arq, FILE *nv_arq, char **nm_arq, char **nm_nv_arq){     //Essa função irá receber o nome dos arquivos, o .csv
+    *nm_arq = (char *) malloc(14 * sizeof(char));                                       //e o .bin a ser criado
     *nm_nv_arq = (char *) malloc(14 * sizeof(char));
     scanf("%s %s", *nm_arq, *nm_nv_arq);
 
-    *arq = fopen(*nm_arq, "r+");
-    if(*arq == NULL){                                        //Checa se n tem inconsistencia
+    *arq = fopen(*nm_arq, "r+");                                            //Assim como verificará inconsistência no momento da abertura
+    if(*arq == NULL){                                                       //do arquivo. Imprimindo uma mensagem de erro se necessário
         printf("Falha no processamento do arquivo.\n");
         free(*nm_arq);
         free(*nm_nv_arq);
@@ -26,8 +26,8 @@ int nomes_arqs_veiculos(FILE **arq, FILE *nv_arq, char **nm_arq, char **nm_nv_ar
     return 0;
 }
 
-void ler_cabecalho_csv_veiculos(Cb_vcl *cab, FILE *arq){                    //Pra ler cabecalho do csv
-    cab->status = '0';
+void ler_cabecalho_csv_veiculos(Cb_vcl *cab, FILE *arq){                    //Essa função irá ler a primeira linha do arquivo .csv, referente
+    cab->status = '0';                                                      //ao cabeçalho. Iremos recebe-lo com o uso do "fscanf"
     cab->byteProxReg = 175;
     cab->nroRegistros = 0;
     cab->nroRegRemovidos = 0;
@@ -40,12 +40,8 @@ void ler_cabecalho_csv_veiculos(Cb_vcl *cab, FILE *arq){                    //Pr
     getc(arq);
 }
 
-void escreve_cabecalho_bin_veiculos(Cb_vcl *cab, FILE *b_arq){                       //Pra colocar o cabecalho no bin -> vai reescrever varias vezes
-    fwrite(cab, sizeof(Cb_vcl), 1, b_arq);
-}
-
-void recebe_registro_csv_veiculos(Dd_vcl *reg, FILE *arq){                           //Pra receber linha do csv
-    char qtde_lugares[4], codline[4];
+void recebe_registro_csv_veiculos(Dd_vcl *reg, FILE *arq){                  //Essa função irá ler uma linha do arquivo .csv para atribuir os valores
+    char qtde_lugares[4], codline[4];                                       //dos campos do registro correspondente. Para isso, usaremos o "fscanf"
 
     fscanf(arq, "%[^,]", reg->prefixo);
     fscanf(arq, ",%[^,]", reg->data);
@@ -55,9 +51,9 @@ void recebe_registro_csv_veiculos(Dd_vcl *reg, FILE *arq){                      
     fscanf(arq, ",%[^\n]", reg->categoria);
     getc(arq);
 
-    if(reg->prefixo[0] == '*')  reg->removido = '0';
-    else    reg->removido = '1';
-    if(checa_nulo(qtde_lugares) < 0)    reg->quantidadeLugares = -1;
+    if(reg->prefixo[0] == '*')  reg->removido = '0';                        //Depois de receber, rapidamente trataremos de forma superficial os campos
+    else    reg->removido = '1';                                            //nulos, se o registro foi removido ou não e seu tamanho total. O tratamento
+    if(checa_nulo(qtde_lugares) < 0)    reg->quantidadeLugares = -1;        //mais completo será feito posteriormente em "manipula_campos_veiculos"
     else    reg->quantidadeLugares = atoi(qtde_lugares);
     if(checa_nulo(codline) < 0)    reg->codLinha = -1;
     else    reg->codLinha = atoi(codline);
@@ -66,16 +62,16 @@ void recebe_registro_csv_veiculos(Dd_vcl *reg, FILE *arq){                      
     if(checa_nulo(reg->categoria) < 0)  preenche_string_nula(reg->categoria, 1);
     reg->tamanhoCategoria = strlen(reg->categoria);
     reg->tamanhoModelo = strlen(reg->modelo);
-    reg->tamanhoRegistro = strlen(reg->categoria) + strlen(reg->modelo) + 31;   //O tamanho das strings variaveis + os fixos
+    reg->tamanhoRegistro = strlen(reg->categoria) + strlen(reg->modelo) + 31;
 }
 
-void manipula_campos_veiculos(Cb_vcl *cab, Dd_vcl *reg){                                 //Pra manipular os campos nulos e mudar o cabeçalho
-    if(checa_nulo(reg->prefixo) < 0)    preenche_string_nula(reg->prefixo, 5);
+void manipula_campos_veiculos(Cb_vcl *cab, Dd_vcl *reg){                        //Essa função irá manipular os campos nulos do registro, para que
+    if(checa_nulo(reg->prefixo) < 0)    preenche_string_nula(reg->prefixo, 5);  //eles obtenham a formatação desejada ao preencher o espaço não utilizado
     else if(strlen(reg->prefixo) != 5)  preenche_lixo(reg->prefixo, strlen(reg->prefixo), 5);
     if(checa_nulo(reg->data) < 0)       preenche_string_nula(reg->data, 10);
     else if(strlen(reg->data) != 10)    preenche_lixo(reg->data, strlen(reg->data), 10);
 
-    if(reg->removido == '0'){
+    if(reg->removido == '0'){                                                   //Também trataremos a contagem de registros removidos e totais no arquivo
         cab->nroRegRemovidos++;
         for(int i = 0; i < 4; i++)
             reg->prefixo[i] = reg->prefixo[i + 1];
@@ -84,10 +80,10 @@ void manipula_campos_veiculos(Cb_vcl *cab, Dd_vcl *reg){                        
         cab->nroRegistros++;
 }
 
-void preenche_dados_bin_veiculos(Dd_vcl *reg, FILE *b_arq){                              //Pra preencher 1 "linha" do bin
-    fwrite(&reg->removido, 1, 1, b_arq);
-    fwrite(&reg->tamanhoRegistro, 4, 1, b_arq);
-    fwrite(reg->prefixo, 1, 5, b_arq);
+void preenche_dados_bin_veiculos(Dd_vcl *reg, FILE *b_arq){                 //Essa função usará "fwrite" para inserir 1 novo registro no arquivo de dados
+    fwrite(&reg->removido, 1, 1, b_arq);                                    //Para casos em que as strings de tamanho variável sejam nulas, ou seja, se
+    fwrite(&reg->tamanhoRegistro, 4, 1, b_arq);                             //"tamanhoModelo" ou "tamanhoCategoria" forem iguais a -1, não iremos colocar
+    fwrite(reg->prefixo, 1, 5, b_arq);                                      //nenhum byte de "modelo" ou "categoria" no arquivo
     fwrite(reg->data, 1, 10, b_arq);
     fwrite(&reg->quantidadeLugares, 4, 1, b_arq);
     fwrite(&reg->codLinha, 4, 1, b_arq);
@@ -97,9 +93,9 @@ void preenche_dados_bin_veiculos(Dd_vcl *reg, FILE *b_arq){                     
     if(reg->tamanhoCategoria > 0)   fwrite(reg->categoria, 1, reg->tamanhoCategoria, b_arq);
 }
 
-void ler_cabecalho_bin_veiculos(Cb_vcl *cabecalho, FILE *b_arq){                  //Essa função irá ler o cabeçalho do arquivo binário de veículos
-    fread(&cabecalho->status, 1, 1, b_arq);                                       //A leitura de cada item foi feita utilizando "fread" e os tamanhos
-    fread(&cabecalho->byteProxReg, 8, 1, b_arq);                                  //das variáveis de acordo com a descrição do trabalho
+void ler_cabecalho_bin_veiculos(Cb_vcl *cabecalho, FILE *b_arq){            //Essa função irá ler o cabeçalho do arquivo binário de veículos
+    fread(&cabecalho->status, 1, 1, b_arq);                                 //A leitura de cada item foi feita utilizando "fread" e os tamanhos
+    fread(&cabecalho->byteProxReg, 8, 1, b_arq);                            //das variáveis de acordo com a descrição do trabalho
     fread(&cabecalho->nroRegistros, 4, 1, b_arq);
     fread(&cabecalho->nroRegRemovidos, 4, 1, b_arq);
     fread(cabecalho->descrevePrefixo, 18, 1, b_arq);
@@ -110,7 +106,7 @@ void ler_cabecalho_bin_veiculos(Cb_vcl *cabecalho, FILE *b_arq){                
     fread(cabecalho->descreveCategoria, 20, 1, b_arq);
 }
 
-void recebe_registro_bin_veiculos(Dd_vcl *reg, FILE *b_arq){                         //Essa função irá ler 1 registro do arquivo binário de veículos
+void recebe_registro_bin_veiculos(Dd_vcl *reg, FILE *b_arq){                //Essa função irá ler 1 registro do arquivo binário de veículos
     fread(&reg->removido, 1, 1, b_arq);                                     //A leitura de cada item foi feita utilizando "fread" e os tamanhos,
     fread(&reg->tamanhoRegistro, 4, 1, b_arq);                              //das variáveis fixas, obtido de acordo com a descrição do trabalho
     fread(reg->prefixo, 1, 5, b_arq);
@@ -125,10 +121,10 @@ void recebe_registro_bin_veiculos(Dd_vcl *reg, FILE *b_arq){                    
         fread(reg->categoria, 1, reg->tamanhoCategoria, b_arq);
 }
 
-void imprime_registro_veiculos(Cb_vcl *cab, Dd_vcl *reg){                             //Essa função irá utilizar o cabeçalho do arquivo (cab) e o atual
-    char *cab1 = trata_string_veiculos(cab->descrevePrefixo, 18);                    //registro analisado (reg) para imprimir corretamente as informações
-    char *cab2 = trata_string_veiculos(cab->descreveModelo, 17);                     //Cada string imprimível será obtida com o retorno da função "trata_string_veiculos",
-    char *cab3 = trata_string_veiculos(cab->descreveCategoria, 20);                  //declarada no arquivo "gerais.c"
+void imprime_registro_veiculos(Cb_vcl *cab, Dd_vcl *reg){                   //Essa função irá utilizar o cabeçalho do arquivo (cab) e o atual
+    char *cab1 = trata_string_veiculos(cab->descrevePrefixo, 18);           //registro analisado (reg) para imprimir corretamente as informações
+    char *cab2 = trata_string_veiculos(cab->descreveModelo, 17);            //Cada string imprimível será obtida com o retorno da função,
+    char *cab3 = trata_string_veiculos(cab->descreveCategoria, 20);         //"trata_string_veiculos" declarada no arquivo "gerais.c"
     char *cab4 = trata_string_veiculos(cab->descreveData, 35);
     char *cab5 = trata_string_veiculos(cab->descreveLugares, 42);
     char *reg1 = trata_string_veiculos(reg->prefixo, 5);
@@ -153,12 +149,12 @@ void imprime_registro_veiculos(Cb_vcl *cab, Dd_vcl *reg){                       
     free(reg4);
 }
 
-int checa_impressao_veiculos(char *busca, char *campo, Dd_vcl *reg){                 //Essa função irá verificar se o registro (reg) recebido possui
+int checa_impressao_veiculos(char *busca, char *campo, Dd_vcl *reg){        //Essa função irá verificar se o registro (reg) recebido possui
     int verifica = -1;                                                      //o valor "busca" em seu "campo", ou seja, se esse registro
     char *aux = NULL;                                                       //poderá ou não ser impresso
 
     if(strcmp(campo, "prefixo") == 0){                                      //Com os ifs e else-ifs externos, saberemos em qual campo do registro
-        aux = trata_string_veiculos(reg->prefixo, 5);                                //devemos procurar. Depois, usaremos "trata_string_veiculos" para manipular o
+        aux = trata_string_veiculos(reg->prefixo, 5);                       //devemos procurar. Depois, usaremos "trata_string_veiculos" para manipular o
         if(strcmp(busca, aux) == 0) verifica++;                             //valor do campo e compará-lo com "busca"
     }else if(strcmp(campo, "data") == 0){
         aux = trata_string_veiculos(reg->data, 10);
@@ -166,8 +162,8 @@ int checa_impressao_veiculos(char *busca, char *campo, Dd_vcl *reg){            
     }else if(strcmp(campo, "quantidadeLugares") == 0){                      //Usaremos "atoi" para comparar o valor de "quantidadeLugares"
         if(strcmp(busca, "NULO") == 0 && reg->quantidadeLugares == -1)  verifica++;
         else if(atoi(busca) == reg->quantidadeLugares)  verifica++;
-    }else if(strcmp(campo, "modelo") == 0){                                 //Para campos de tamanhos variáveis, verificaremos seus tamanhos e as
-        if(strcmp(busca, "NULO") == 0 && reg->tamanhoModelo == -1)  verifica++; //strings, caso não sejam nulas
+    }else if(strcmp(campo, "modelo") == 0){                                     //Para campos de tamanhos variáveis, verificaremos seus tamanhos
+        if(strcmp(busca, "NULO") == 0 && reg->tamanhoModelo == -1)  verifica++; //e as strings, caso não sejam nulas
         aux = trata_string_veiculos(reg->modelo, reg->tamanhoModelo);
         if(strcmp(busca, aux) == 0) verifica++;
     }else if(strcmp(campo, "categoria") == 0){
@@ -179,7 +175,7 @@ int checa_impressao_veiculos(char *busca, char *campo, Dd_vcl *reg){            
     return verifica;                                                        //Retornaremos -1 se não devemos imprimir e 0 caso seja necessário
 }
 
-void recebe_registro_ep_veiculos(Dd_vcl *reg){                                       //Função que irá receber as informações de um novo registro a partir
+void recebe_registro_ep_veiculos(Dd_vcl *reg){                              //Função que irá receber as informações de um novo registro a partir
     char aux_lugares[4], aux_cod[6];                                        //da entrada padrão
     reg->removido = '1';                                                    //Primeiramente, sinalizaremos que o registro não é um dos removidos
 

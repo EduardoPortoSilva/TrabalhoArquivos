@@ -1,4 +1,8 @@
-Salve Salve. Repositório para o Trabalho 1 de Organização de Arquivos :)
+Pasta com os arquivos .c, .h, Makefile e o .zip referentes ao 1* trabalho da disciplina de Organização de Arquivos.
 
-Att 28/5: Achei onde tava dando problema, mudei a função trata string na gerais, agora tem 2 (uma pra veiculos e uma pra linhas). Dados_linhas funcionando, Busca_Linhas funcionando
-Só falta resolver o caso 15, acho q o problema é o cartao nulo, mas eu ainda nao consegui resolver
+O Trabalho consiste no armazenamento de dados e outras operações em arquivos binários.
+Com um total de 8 operações, sendo 4 para cada tipo de arquivo, veiculos ou linhas, para a manipulação,
+busca, impressão e adição de registros em cada um dos arquivos binários. Obtidos, por sua vez, a partir de
+arquivos .csv distintos. Cada um com diferentes cabeçalhos, quantidade de registros, campos etc.
+
+Trabalho do Grupo 8: Eduardo Henrique Porto Silva e Tulio Santana Ramos

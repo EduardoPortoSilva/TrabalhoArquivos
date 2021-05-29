@@ -5,6 +5,3 @@ all:
 
 run:
 	./programaTrab
-
-valgrind:
-	valgrind --tool=memcheck --leak-check=full --track-origins=yes --show-leak-kinds=all -v ./programaTrab

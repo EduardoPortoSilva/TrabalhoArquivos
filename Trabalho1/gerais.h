@@ -16,9 +16,6 @@ void copiar_string(char *str1, char *str2, int size);
 char *trata_string_veiculos(char *str, int size);
 char *trata_string_linhas(char *str, int size);
 char *manipula_data(char *str, char *print);
-
-
-
 void binarioNaTela(char *nomeArquivoBinario);
 void scan_quote_string(char *str);
 
