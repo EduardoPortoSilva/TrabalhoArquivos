@@ -10,7 +10,7 @@
 
 int main(int argc, char *argv[]){
     int op;                                 //Na "main", receberemos o código da operação e chamaremos
-    scanf("%d", &op);                       //a respectiva função por meio da switch-case
+    scanf("%d", &op);                //a respectiva função por meio da switch-case
 
     switch(op){
         case 1:
